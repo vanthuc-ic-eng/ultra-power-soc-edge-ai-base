@@ -1,0 +1,217 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Sat Nov 14 03:18:49 2026
+| Host         : ic-workstation running 64-bit Ubuntu 24.04.5 LTS
+| Command      : report_timing -delay_type min_max -max_paths 5 -file /workspace/projects/pulp_edge_ai_soc/reports/fpga/timing_paths_detailed.rpt
+| Design       : pulp_riscv_ai_soc_top
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.081ns  (arrival time - required time)
+  Source:                 u_cpu/data_wdata_q_reg[15]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            ram_mem_reg/DIADI[15]
+                            (rising edge-triggered cell RAMB36E1 clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.257ns  (logic 0.141ns (54.826%)  route 0.116ns (45.174%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.022ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.432ns
+    Source Clock Delay      (SCD):    0.410ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.410     0.410    u_cpu/clk
+    SLICE_X7Y35          FDCE                                         r  u_cpu/data_wdata_q_reg[15]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X7Y35          FDCE (Prop_fdce_C_Q)         0.141     0.551 r  u_cpu/data_wdata_q_reg[15]/Q
+                         net (fo=2, routed)           0.116     0.667    cpu_dwdata[15]
+    RAMB36_X0Y6          RAMB36E1                                     r  ram_mem_reg/DIADI[15]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.432     0.432    clk
+    RAMB36_X0Y6          RAMB36E1                                     r  ram_mem_reg/CLKARDCLK
+                         clock pessimism              0.000     0.432    
+    RAMB36_X0Y6          RAMB36E1 (Hold_ramb36e1_CLKARDCLK_DIADI[15])
+                                                      0.155     0.587    ram_mem_reg
+  -------------------------------------------------------------------
+                         required time                         -0.587    
+                         arrival time                           0.667    
+  -------------------------------------------------------------------
+                         slack                                  0.081    
+
+Slack (MET) :             0.083ns  (arrival time - required time)
+  Source:                 u_cpu/data_wdata_q_reg[11]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            ram_mem_reg/DIADI[11]
+                            (rising edge-triggered cell RAMB36E1 clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.260ns  (logic 0.141ns (54.291%)  route 0.119ns (45.709%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.022ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.432ns
+    Source Clock Delay      (SCD):    0.410ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.410     0.410    u_cpu/clk
+    SLICE_X7Y34          FDCE                                         r  u_cpu/data_wdata_q_reg[11]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X7Y34          FDCE (Prop_fdce_C_Q)         0.141     0.551 r  u_cpu/data_wdata_q_reg[11]/Q
+                         net (fo=2, routed)           0.119     0.670    cpu_dwdata[11]
+    RAMB36_X0Y6          RAMB36E1                                     r  ram_mem_reg/DIADI[11]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.432     0.432    clk
+    RAMB36_X0Y6          RAMB36E1                                     r  ram_mem_reg/CLKARDCLK
+                         clock pessimism              0.000     0.432    
+    RAMB36_X0Y6          RAMB36E1 (Hold_ramb36e1_CLKARDCLK_DIADI[11])
+                                                      0.155     0.587    ram_mem_reg
+  -------------------------------------------------------------------
+                         required time                         -0.587    
+                         arrival time                           0.670    
+  -------------------------------------------------------------------
+                         slack                                  0.083    
+
+Slack (MET) :             0.096ns  (arrival time - required time)
+  Source:                 u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.428ns  (logic 0.141ns (32.960%)  route 0.287ns (67.040%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.022ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.432ns
+    Source Clock Delay      (SCD):    0.410ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.410     0.410    u_hwpe_subsystem/u_hwpe/u_stream_ctrl/clk
+    SLICE_X17Y14         FDCE                                         r  u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X17Y14         FDCE (Prop_fdce_C_Q)         0.141     0.551 r  u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/Q
+                         net (fo=46, routed)          0.287     0.838    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/ADDRD0
+    SLICE_X16Y16         RAMD32                                       r  u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.432     0.432    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/WCLK
+    SLICE_X16Y16         RAMD32                                       r  u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA/CLK
+                         clock pessimism              0.000     0.432    
+    SLICE_X16Y16         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.742    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA
+  -------------------------------------------------------------------
+                         required time                         -0.742    
+                         arrival time                           0.838    
+  -------------------------------------------------------------------
+                         slack                                  0.096    
+
+Slack (MET) :             0.096ns  (arrival time - required time)
+  Source:                 u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA_D1/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.428ns  (logic 0.141ns (32.960%)  route 0.287ns (67.040%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.022ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.432ns
+    Source Clock Delay      (SCD):    0.410ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.410     0.410    u_hwpe_subsystem/u_hwpe/u_stream_ctrl/clk
+    SLICE_X17Y14         FDCE                                         r  u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X17Y14         FDCE (Prop_fdce_C_Q)         0.141     0.551 r  u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/Q
+                         net (fo=46, routed)          0.287     0.838    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/ADDRD0
+    SLICE_X16Y16         RAMD32                                       r  u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA_D1/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.432     0.432    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/WCLK
+    SLICE_X16Y16         RAMD32                                       r  u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA_D1/CLK
+                         clock pessimism              0.000     0.432    
+    SLICE_X16Y16         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.742    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                         -0.742    
+                         arrival time                           0.838    
+  -------------------------------------------------------------------
+                         slack                                  0.096    
+
+Slack (MET) :             0.096ns  (arrival time - required time)
+  Source:                 u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMB/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.428ns  (logic 0.141ns (32.960%)  route 0.287ns (67.040%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.022ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.432ns
+    Source Clock Delay      (SCD):    0.410ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.410     0.410    u_hwpe_subsystem/u_hwpe/u_stream_ctrl/clk
+    SLICE_X17Y14         FDCE                                         r  u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X17Y14         FDCE (Prop_fdce_C_Q)         0.141     0.551 r  u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_wb_addr_o_reg[2]/Q
+                         net (fo=46, routed)          0.287     0.838    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/ADDRD0
+    SLICE_X16Y16         RAMD32                                       r  u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMB/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=1086, unset)         0.432     0.432    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/WCLK
+    SLICE_X16Y16         RAMD32                                       r  u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMB/CLK
+                         clock pessimism              0.000     0.432    
+    SLICE_X16Y16         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.742    u_act_mem/bank1_hidden_w32_reg_0_15_12_17/RAMB
+  -------------------------------------------------------------------
+                         required time                         -0.742    
+                         arrival time                           0.838    
+  -------------------------------------------------------------------
+                         slack                                  0.096    
+
+
+
+

@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONQUEROR-1: An Ultra-Low-Power RISC-V Edge AI SoC (arXiv HTML Style)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #FFFFFF;
+      --bg-panel: #F8FAFC;
+      --bg-code: #F1F5F9;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-muted: #6B7280;
+      --border-light: #E5E7EB;
+      --border-dark: #1F2937;
+      --link-blue: #1D4ED8;
+      --arxiv-red: #B31B1B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: 'Noto Serif', Georgia, 'Times New Roman', serif;
+      font-size: 16.5px;
+      line-height: 1.72;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: var(--bg-code);
+      color: #0F172A;
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* Top arXiv-style Header Bar */
+    .arxiv-topbar {
+      background-color: #FFFFFF;
+      border-bottom: 1px solid var(--border-light);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .arxiv-topbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0.65rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .arxiv-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .arxiv-badge img {
+      height: 26px;
+      width: auto;
+    }
+
+    .arxiv-tag {
+      color: var(--arxiv-red);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 1.15rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .top-nav a {
+      color: var(--link-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .top-nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Page Layout: Left TOC + Main Paper Column */
+    .page-wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 235px minmax(0, 840px);
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .page-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar {
+        display: none;
+      }
+    }
+
+    /* Left Table of Contents (arXiv HTML style) */
+    .toc-sidebar {
+      position: sticky;
+      top: 4.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.48;
+      border-right: 1px solid var(--border-light);
+      padding-right: 1.25rem;
+    }
+
+    .toc-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.42rem;
+    }
+
+    .toc-list a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: block;
+      padding: 0.14rem 0;
+    }
+
+    .toc-list a:hover {
+      color: var(--link-blue);
+    }
+
+    .toc-sub {
+      padding-left: 0.9rem;
+      font-size: 0.78rem;
+      color: var(--text-muted) !important;
+    }
+
+    /* Main Paper Column */
+    article.paper {
+      background: #FFFFFF;
+      min-width: 0;
+    }
+
+    /* Title & Authors */
+    .paper-header {
+      text-align: center;
+      padding-bottom: 1.75rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .paper-kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--arxiv-red);
+      margin-bottom: 0.65rem;
+    }
+
+    h1.paper-title {
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.28;
+      color: #000000;
+      margin-bottom: 1rem;
+    }
+
+    .paper-authors {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .paper-affil {
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Abstract Box */
+    .abstract-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--arxiv-red);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 4px;
+    }
+
+    .abstract-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      margin-bottom: 0.45rem;
+    }
+
+    .abstract-box p {
+      font-size: 0.96rem;
+      color: var(--text-secondary);
+      text-align: justify;
+    }
+
+    /* Key Summary Metrics Strip (Clean White Paper Cards) */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.65rem;
+      margin: 1.5rem 0 2.25rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    @media (max-width: 780px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .kpi-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 0.8rem 0.5rem;
+      text-align: center;
+    }
+
+    .kpi-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #000000;
+    }
+
+    .kpi-lbl {
+      font-size: 0.71rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+    }
+
+    .kpi-sub {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+    }
+
+    /* Headings */
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #000000;
+      margin-top: 2.5rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 1.65rem;
+      margin-bottom: 0.55rem;
+    }
+
+    p {
+      margin-bottom: 0.95rem;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0.5rem 0 1.1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.45rem;
+    }
+
+    /* Figures */
+    figure.paper-fig {
+      margin: 1.75rem auto;
+      padding: 1rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      text-align: center;
+      max-width: 640px;
+    }
+
+    figure.paper-fig.wide {
+      max-width: 100%;
+    }
+
+    figure.paper-fig img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 6px;
+      cursor: zoom-in;
+      border: 1px solid #CBD5E1;
+    }
+
+    /* Side-by-Side 2D / 3D ASIC Gallery Pair (Khoi Nguyen npu-tapeout style) */
+    .fig-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 760px) {
+      .fig-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .fig-pair figure.paper-fig {
+      margin: 0;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    figcaption {
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    figcaption strong {
+      color: #000000;
+    }
+
+    /* Interactive 3D Multi-Layer GDSII Viewer Card */
+    .gds3d-card {
+      margin: 1.75rem 0;
+      border: 1px solid #1E293B;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #070B12;
+      color: #F8FAFC;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+    }
+
+    .gds3d-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      padding: 0.7rem 1rem;
+      background: #0F172A;
+      border-bottom: 1px solid #1E293B;
+      font-size: 0.8rem;
+    }
+
+    .gds3d-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .gds3d-btn {
+      background: #1E293B;
+      color: #E2E8F0;
+      border: 1px solid #334155;
+      border-radius: 5px;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .gds3d-btn:hover {
+      background: #334155;
+    }
+
+    .gds3d-btn.active {
+      background: #2563EB;
+      border-color: #60A5FA;
+      color: #FFFFFF;
+    }
+
+    .gds3d-btn.pulse-active {
+      background: #059669;
+      border-color: #34D399;
+      color: #FFFFFF;
+    }
+
+    .gds3d-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: radial-gradient(circle at 50% 35%, #111C2D 0%, #060911 100%);
+    }
+
+    #gds3d-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+
+    #gds3d-canvas:active {
+      cursor: grabbing;
+    }
+
+    .gds3d-legend {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(11, 15, 25, 0.86);
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.72rem;
+      line-height: 1.55;
+      pointer-events: none;
+    }
+
+    .gds3d-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #E2E8F0;
+    }
+
+    .gds3d-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .gds3d-overlay-info {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      background: rgba(11, 15, 25, 0.82);
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.74rem;
+      color: #94A3B8;
+      pointer-events: none;
+    }
+
+    .gds3d-caption {
+      padding: 0.75rem 1rem;
+      background: #0B0F19;
+      border-top: 1px solid #1E293B;
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      line-height: 1.5;
+    }
+
+    /* Academic Booktabs Tables */
+    .table-wrap {
+      margin: 1.65rem 0;
+      overflow-x: auto;
+    }
+
+    .table-caption {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    table.booktabs {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.84rem;
+      background: #FFFFFF;
+      border-top: 2px solid #000000;
+      border-bottom: 2px solid #000000;
+    }
+
+    table.booktabs thead th {
+      padding: 0.6rem 0.65rem;
+      text-align: left;
+      font-weight: 700;
+      color: #000000;
+      border-bottom: 1px solid #000000;
+      background: #F8FAFC;
+    }
+
+    table.booktabs tbody td {
+      padding: 0.52rem 0.65rem;
+      border-bottom: 1px solid #E5E7EB;
+      color: var(--text-primary);
+    }
+
+    table.booktabs tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.booktabs th.num,
+    table.booktabs td.num {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-pass {
+      display: inline-block;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: #DCFCE7;
+      color: #166534;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    /* Timing Breakdown Box */
+    .timing-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.15rem 0 1.4rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.86rem;
+    }
+
+    .timing-bar {
+      display: flex;
+      height: 12px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #E2E8F0;
+      margin: 0.6rem 0;
+    }
+
+    .t-s1 { width: 41.2%; background: #E11D48; }
+    .t-s2 { width: 43.5%; background: #2563EB; }
+    .t-s3 { width: 11.8%; background: #D97706; }
+
+    .timing-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      margin-right: 5px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-light);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      background: #FFFFFF;
+    }
+
+    /* Lightbox Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 92vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      background: #FFFFFF;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP ARXIV BAR -->
+  <header class="arxiv-topbar">
+    <div class="arxiv-topbar-inner">
+      <div class="arxiv-badge">
+        <img src="assets/logo_hcmute.png" alt="HCMUTE Logo" />
+        <span class="arxiv-tag">arXiv:2026.CONQUEROR-1 [cs.AR]</span>
+        <span>• HCMUTE Edge AI</span>
+      </div>
+      <nav class="top-nav">
+        <a href="#sec-arch">1. Toàn chip</a>
+        <a href="#sec-npu">2. LA-HWPE</a>
+        <a href="#sec-mem">3. TCDM &amp; ICG</a>
+        <a href="#sec-verify">4. FPGA Ultra-Low-LUT</a>
+        <a href="#sec-asic-3d">5. ASIC 3D GDSII &amp; 4-Corner PVT</a>
+        <a href="https://github.com/vanthuc-ic-eng/ultra-power-soc-edge-ai-base" target="_blank" style="background:#24292f;color:#fff;padding:0.2rem 0.65rem;border-radius:4px;font-weight:700;display:inline-flex;align-items:center;gap:0.35rem;text-decoration:none;"><svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:text-bottom;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Mã nguồn GitHub</a>
+        <a href="http://localhost:8080/" style="background:#10b981;color:#fff;padding:0.2rem 0.65rem;border-radius:4px;font-weight:700;">⚡ Live PYNQ-Z2 Demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <!-- LEFT TOC SIDEBAR -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">Mục lục Bài báo</div>
+      <ul class="toc-list">
+        <li><a href="#sec-abstract">Tóm tắt (Abstract)</a></li>
+        <li><a href="#sec-arch">1. Kiến trúc Toàn chip SoC</a></li>
+        <li><a href="#sec-npu">2. Bộ tăng tốc LA-HWPE</a></li>
+        <li><a href="#sec-encoder" class="toc-sub">2.1. Shared Log8 Encoder</a></li>
+        <li><a href="#sec-zeroskip" class="toc-sub">2.2. Zero-Skipping BRAM AGU</a></li>
+        <li><a href="#sec-timing" class="toc-sub">2.3. Retimed Pipeline 2 tầng</a></li>
+        <li><a href="#sec-mem">3. Bộ nhớ 4-Bank &amp; ICG</a></li>
+        <li><a href="#sec-verify">4. Xác thực FPGA (1,691 LUTs)</a></li>
+        <li><a href="#sec-asic-3d">5. ASIC Sky130 3D &amp; PVT</a></li>
+        <li><a href="#sec-gds-gallery" class="toc-sub">5.1. 2D/3D Multi-Layer GDSII</a></li>
+        <li><a href="#sec-interactive-3d" class="toc-sub">5.2. Mô phỏng 3D Tương tác</a></li>
+        <li><a href="#sec-pvt" class="toc-sub">5.3. Benchmark 4 Góc PVT</a></li>
+        <li style="margin-top:0.4rem;padding-top:0.4rem;border-top:1px dashed var(--border-light);"><a href="https://github.com/vanthuc-ic-eng/ultra-power-soc-edge-ai-base" target="_blank" style="color:#0f172a;font-weight:700;">🔗 Kho mã nguồn (GitHub)</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN PAPER BODY -->
+    <article class="paper">
+      <div class="paper-header">
+        <div class="paper-kicker">Edge AI Hardware Design Challenge 2026 • Technical Whitepaper (v1.3.0 Extreme-Low-LUT &amp; Sky130 3D Sign-Off)</div>
+        <h1 class="paper-title">An Ultra-Low-Power Lightweight RISC-V Edge AI SoC for Computer Vision</h1>
+        <div class="paper-authors">Nguyễn Văn Thực, Lê Nhật Minh</div>
+        <div class="paper-affil">Khoa Điện – Điện tử, Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh (HCMUTE)</div>
+        <div class="paper-repo-links" style="margin-top:0.85rem;display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+          <a href="https://github.com/vanthuc-ic-eng/ultra-power-soc-edge-ai-base" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.35rem 0.85rem;background:#0f172a;color:#ffffff;border-radius:6px;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+            <svg height="15" width="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Mã nguồn dự án: vanthuc-ic-eng/ultra-power-soc-edge-ai-base
+          </a>
+        </div>
+      </div>
+
+      <!-- ABSTRACT -->
+      <section id="sec-abstract" class="abstract-box">
+        <div class="abstract-title">Tóm tắt (Abstract)</div>
+        <p>
+          Bài báo trình bày thiết kế và hiện thực hóa <strong>CONQUEROR-1</strong>, một hệ thống trên chip (SoC) không đồng nhất siêu nhẹ kết hợp lõi vi điều khiển RISC-V RV32I và bộ đồng xử lý mạng nơ-ron LA-HWPE 4 làn SIMD dành cho suy luận AI tại biên. Thông qua bốn tối ưu hóa vi kiến trúc cấp sâu gồm: (1) chuyển đổi phép nhân sang miền Logarit 8-bit xấp xỉ không dùng DSP48E1 với duy nhất một bộ <em>Shared Log8 Encoder</em> dùng chung và tái định thời (Retiming) bộ cộng làm tròn qua thanh ghi pipeline; (2) cơ chế tiền quét và bỏ qua chu kỳ rỗng tự hành (<em>Zero-Skipping AGU</em>) lưu chỉ mục trên Block RAM đồng bộ (0 LUT), rút ngắn chu kỳ suy luận từ 12,796 xuống 3,901 chu kỳ (gia tốc 3.28×); (3) nén vùng đệm ẩn TCDM Bank 1 thành 16×32-bit LUTRAM và gom 3 bộ nhân 32-bit của CPU RV32I về 1 lõi nhân dùng chung; hệ thống giảm tới <strong>70.8% số LUT</strong> và <strong>92.8% số Flip-Flop</strong> so với phiên bản cơ sở. Trên FPGA PYNQ-Z2 (XC7Z020), lõi tăng tốc LA-HWPE chỉ chiếm <strong>910 LUTs</strong> (toàn chip SoC <strong>1,691 LUTs</strong>, toàn board <strong>2,030 LUTs</strong>, <strong>0 DSP</strong>), đạt thông lượng <strong>25,634 FPS</strong> (39.01 µs @ 100 MHz, <strong>WNS = +0.469 ns</strong>, <strong>Fmax = 104.92 MHz</strong>) và độ chính xác <strong>97.92%</strong> (100% trên tập 10 chữ số benchmark phần cứng). Đồng thời, thiết kế đã hoàn tất quy trình vật lý ASIC <strong>SkyWater 130nm</strong> (<code>sky130_fd_sc_hd</code>) từ tổng hợp cổng chuẩn, đặt linh kiện &amp; đi dây đa lớp (<code>li1</code>, <code>met1–met4</code>), xuất file nhị phân <code>.gds</code>, dựng mô hình 3D 14 lớp silicon đến kiểm định định thời và công suất đa góc <strong>12-Corner / 4-Extreme-Corner PVT Sign-off</strong>.
+        </p>
+      </section>
+
+      <!-- KPI STRIP -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-val">910 LUTs</div>
+          <div class="kpi-lbl">Lõi AI LA-HWPE</div>
+          <div class="kpi-sub">1,691 LUTs Toàn SoC</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">25,634</div>
+          <div class="kpi-lbl">FPS @ 100 MHz</div>
+          <div class="kpi-sub">3,901 Cycles (3.28×)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">0 DSP</div>
+          <div class="kpi-lbl">DSP48E1 Sử dụng</div>
+          <div class="kpi-sub">100% LUT / StdCell</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">+0.469 ns</div>
+          <div class="kpi-lbl">FPGA Setup Slack</div>
+          <div class="kpi-sub">Fmax 104.92 MHz</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">14,622 µm²</div>
+          <div class="kpi-lbl">Sky130 SIMD Tile</div>
+          <div class="kpi-sub">144.1 MHz (TT 1.8V)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">97.92%</div>
+          <div class="kpi-lbl">Độ chính xác MNIST</div>
+          <div class="kpi-sub">10/10 Bit-Exact (100%)</div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: FULL-CHIP ARCHITECTURE -->
+      <section id="sec-arch">
+        <h2>1. Kiến trúc Toàn chip Không đồng nhất (Full-Chip SoC)</h2>
+        <p>
+          <strong>CONQUEROR-1</strong> được tổ chức theo mô hình SoC chuẩn công nghiệp gồm bốn phân khu chức năng liên kết qua bus ma trận băng thông rộng 128-bit, đảm bảo tách biệt hoàn toàn giữa luồng điều phối hệ thống (Control Plane) và luồng tính toán vector song song (Data Plane).
+        </p>
+
+        <figure class="paper-fig">
+          <img src="assets/conqueror_die_only_square.png" alt="Sơ đồ khối toàn chip CONQUEROR-1" onclick="openLightbox(this.src)" />
+          <figcaption>
+            <strong>Figure 1:</strong> Sơ đồ khối toàn chip CONQUEROR-1 (tỉ lệ khuôn vuông 1:1), thể hiện lõi điều phối RISC-V RV32I (695 LUTs), bus liên kết Crossbar, bộ tăng tốc LA-HWPE 4-SIMD (910 LUTs), bộ nhớ TCDM 51 KB chia 4 Bank chức năng và phân khu ngoại vi/PMU. <em>(Nhấn vào hình để phóng to).</em>
+          </figcaption>
+        </figure>
+
+        <ul>
+          <li><strong>Lõi Điều phối RISC-V RV32I Supervisor (695 LUTs / 183 FFs):</strong> Kiến trúc tuần tự đa chu kỳ sử dụng tệp thanh ghi LUTRAM <code>RAM32M</code> và duy nhất một bộ nhân 32×32 dùng chung cho các lệnh <code>MUL/MULH/MULHSU/MULHU</code>, đảm nhiệm khởi tạo hệ thống, cấu hình MMIO CSR và xử lý ngắt.</li>
+          <li><strong>Bộ tăng tốc Mạng Nơ-ron LA-HWPE (910 LUTs / 411 FFs):</strong> Thực thi toàn bộ các lớp mạng nơ-ron bằng 4 làn phần tử xử lý (PE0–PE3) chạy song song với bộ nhân xấp xỉ Log8 không dùng DSP, kết hợp bộ tạo địa chỉ bỏ qua số 0 tự hành.</li>
+          <li><strong>Bus Ma trận 128-bit Crossbar &amp; 51 KB TCDM SRAM:</strong> Bus kết nối đơn chu kỳ đạt băng thông <strong>1.6 GB/s @ 100 MHz</strong>, nối trực tiếp 4 Bank SRAM chức năng độc lập để cấp đồng thời 4 trọng số Log8 và 1 điểm ảnh kích hoạt mỗi chu kỳ.</li>
+          <li><strong>Ngoại vi &amp; Cầu nối JTAG-UART Trực tiếp:</strong> Tích hợp bộ truyền UART 115,200 baud và cầu truyền dữ liệu JTAG `BSCANE2` cho phép nạp ảnh viết tay thời gian thực từ máy tính xuống bo mạch PYNQ-Z2.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 2: NEURAL ACCELERATOR -->
+      <section id="sec-npu">
+        <h2>2. Vi kiến trúc Bộ tăng tốc LA-HWPE &amp; Các Sáng kiến Cốt lõi</h2>
+        <p>
+          Thay vì nhân bản các khối nhân tích lũy truyền thống gây lãng phí diện tích silicon và băng thông bộ nhớ, kiến trúc <strong>LA-HWPE</strong> tái cấu trúc toàn bộ đường truyền dữ liệu (datapath) từ khâu tiền xử lý độ thưa đến tầng tích lũy 2 nhịp pipeline.
+        </p>
+
+        <figure class="paper-fig">
+          <img src="assets/conqueror_npu_zoom_square.png" alt="Sơ đồ nối dây bộ tăng tốc LA-HWPE" onclick="openLightbox(this.src)" />
+          <figcaption>
+            <strong>Figure 2:</strong> Sơ đồ nối dây chi tiết bên trong bộ tăng tốc LA-HWPE: khối <code>ZERO-SKIPPING AGU</code> (<code>ZERO-SKIP PRESCAN FSM</code> + <code>1024×10 Synchronous BRAM Sparse Index</code>), khối mã hóa dùng chung <code>SHARED LOG8 ENCODER</code>, bus phát thanh, 4 làn PE SIMD, bus gom 128-bit và tầng <code>REQUANT &amp; ARGMAX</code>.
+          </figcaption>
+        </figure>
+
+        <h3 id="sec-encoder">2.1. Bộ mã hóa Log8 Dùng chung (Shared Activation Log Encoder)</h3>
+        <p>
+          Trong phép nhân miền Logarit 8-bit, dữ liệu đầu vào cần đi qua mạch dò bit dẫn đầu (<em>Leading-One Detector – LOD</em>), bộ dịch chuẩn hóa (Barrel Shifter) và bảng tra ánh xạ phân đoạn (<em>Piecewise-Linear Mitchell LUT</em>). Thay vì đặt 8 bộ LOD/Encoder riêng lẻ trong 4 làn PE, thiết kế tiền mã hóa toàn bộ trọng số offline sang định dạng <code>Log8</code> và đặt <strong>duy nhất 1 bộ Shared Log8 Encoder (19 LUTs)</strong> ở đầu vào rồi phát thanh (Broadcast) tới đồng thời cả 4 làn PE. Nhờ đó, mỗi lõi nhân <code>lutalm_core_mul_s8</code> chỉ còn tốn <strong>47 LUTs</strong> (0 DSP).
+        </p>
+
+        <h3 id="sec-zeroskip">2.2. Bộ tạo địa chỉ Bỏ qua số 0 Tự hành trên Block RAM (Zero-LUT Sparse AGU)</h3>
+        <p>
+          Sau hàm kích hoạt ReLU và trên ảnh chữ số viết tay, ma trận đầu vào có tỉ lệ giá trị bằng 0 trung bình đạt <strong>77.3% độ thưa</strong>. Khối <code>ZERO-SKIPPING AGU</code> tích hợp máy trạng thái tiền quét (<code>ST_PRESCAN</code>) tự động duyệt 784 điểm ảnh đầu vào, chốt chỉ số khác 0 đầu tiên vào thanh ghi <code>first_nz_idx_q</code> và lưu các tọa độ <code>Act != 0</code> tiếp theo vào khối <strong>Block RAM đồng bộ <code>1024×10-bit</code> (<code>RAMB18E1</code> trên FPGA / <code>1KB SRAM Macro</code> trên ASIC)</strong> với cơ chế đọc nhìn trước (Lookahead Prefetch <code>sparse_ptr_q + 2</code>). Giải pháp này loại bỏ hoàn toàn 7,840 Flip-Flop và 1,800 LUT MUX của mảng thanh ghi cũ, đồng thời rút ngắn chu kỳ suy luận trung bình từ <strong>12,796 xuống còn 3,901 chu kỳ</strong> (gia tốc <strong>3.28×</strong>).
+        </p>
+
+        <h3 id="sec-timing">2.3. Tái định thời Pipeline 2 Tầng (Retimed Carry Incrementer) @ 100 MHz</h3>
+        <p>
+          Bằng cách dịch chuyển bộ cộng làm tròn bù 2 (<code>base_q + carry_q</code>, gồm 3 tầng <code>CARRY4</code> ~ 1.67 ns) từ cuối Tầng 1 sang đầu Tầng 2 trước bộ tích lũy 32-bit, đường truyền tới hạn giữa hai tầng pipeline được cân bằng tuyệt đối mà vẫn giữ nguyên tính chính xác từng bit và từng chu kỳ. Kết quả định thời sau định tuyến (Post-Route Timing) trên PYNQ-Z2 (XC7Z020) ở 100 MHz đạt độ dự trữ dương an toàn <strong>WNS = +0.469 ns</strong> (Fmax đạt 104.92 MHz, không phát sinh bất kỳ vi phạm thời gian nào):
+        </p>
+
+        <div class="timing-box">
+          <div><strong>Phân bố trễ đường truyền vật lý sau tối ưu (Post-Route Critical Path @ 100 MHz):</strong></div>
+          <div class="timing-bar">
+            <div class="t-s1" style="width:43.2%;" title="Stage 1 (Logic + Retimed Multiplier): 4.12 ns"></div>
+            <div class="t-s2" style="width:44.4%;" title="Stage 2 (Increment + Accumulator): 4.23 ns"></div>
+            <div class="t-s3" style="width:12.4%;" title="Clock Uncertainty & Routing: 1.18 ns"></div>
+          </div>
+          <div class="timing-legend">
+            <span><span class="dot" style="background:#E11D48;"></span>Stage 1 (Retimed Multiplier): <strong>4.12 ns</strong></span>
+            <span><span class="dot" style="background:#2563EB;"></span>Stage 2 (Increment + Accumulator): <strong>4.23 ns</strong></span>
+            <span><span class="dot" style="background:#D97706;"></span>Routing Delay: <strong>1.18 ns</strong></span>
+            <span><strong>Tổng trễ: 9.531 ns / 10.000 ns</strong> &rarr; Setup Slack: <strong>+0.469 ns (Fmax = 104.92 MHz, MET)</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: MEMORY & POWER -->
+      <section id="sec-mem">
+        <h2>3. Kiến trúc Bộ nhớ TCDM 4 Bank &amp; Ngắt xung ICG Đa tầng</h2>
+        <p>
+          Để cấp dữ liệu liên tục cho 4 làn SIMD mà không tạo nghẽn cổ chai truy cập, vùng nhớ TCDM 51 KB được chia thành <strong>4 Bank chức năng độc lập</strong> kết nối qua bus 128-bit, đồng thời áp dụng cơ chế cô lập toán hạng (Operand Isolation) và ngắt xung nhịp đồng bộ (Integrated Clock Gating – ICG).
+        </p>
+
+        <figure class="paper-fig">
+          <img src="assets/conqueror_mem_pwr_zoom.png" alt="Kiến trúc 4-Bank TCDM và ICG" onclick="openLightbox(this.src)" />
+          <figcaption>
+            <strong>Figure 3:</strong> Kiến trúc phân vùng 4 Bank TCDM độc lập (trên) và sơ đồ nguyên lý tế bào ngắt xung chuẩn ASIC Latch-Based ICG kèm cơ chế cách ly công suất 3 tầng (dưới).
+          </figcaption>
+        </figure>
+
+        <ul>
+          <li><strong>Bank 0 (Act In – 1024×8-bit):</strong> Lưu ảnh đầu vào 784 byte (suy diễn thành 128 LUTRAM trên FPGA hoặc <code>sky130_sram_1kbyte_1rw1r_8x1024_8</code> trên ASIC), tích hợp cổng ngắt xung đọc <code>bank0_rd_en</code>.</li>
+          <li><strong>Bank 1 (Hidden – 16×32-bit Word-Packed Buffer):</strong> Nhận đồng thời 4 byte kết quả tái lượng tử hóa <code>{act3, act2, act1, act0}</code> từ 4 làn PE chỉ trong 1 chu kỳ ghi 32-bit, chỉ tốn <strong>32 LUTRAM và 0 Flip-Flop</strong> trên FPGA.</li>
+          <li><strong>Bank 2 &amp; Bank 3 (Weights &amp; Bias ROM):</strong> Lưu 50,864 trọng số Log8 đã tiền mã hóa và 76 hệ số Bias 32-bit, cấp song song 128-bit Bias và 32-bit Weight mỗi chu kỳ.</li>
+          <li><strong>Cách ly công suất 3 tầng:</strong> (1) Cô lập toán hạng đầu vào <code>isolated_act = valid_i ? act_i : 8'd0</code> ngăn chặn hoàn toàn xung chuyển trạng thái vô ích trên tổ hợp nhân; (2) Bộ AGU bỏ qua 77.3% chu kỳ đầu vào bằng 0; (3) Khóa nạp thanh ghi tích lũy 32-bit khi <code>prod_q == 0</code>.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 4: FPGA ULTRA-LOW-LUT VERIFICATION -->
+      <section id="sec-verify">
+        <h2>4. Kết quả Tối ưu hóa Phần cứng Cực đại trên FPGA Zynq-7000 (Dưới 2,100 LUTs)</h2>
+        <p>
+          Bảng I đối chiếu tài nguyên phần cứng trước và sau tối ưu hóa (`v1.2.0-extreme-low-lut`) trên chip <strong>AMD Xilinx Zynq-7000 XC7Z020-CLG400-1 (Bo mạch TUL PYNQ-Z2)</strong> ở tần số 100 MHz (Vivado v2024.2 Post-Place &amp; Route). Toàn bộ SoC giảm từ 5,794 LUTs xuống chỉ còn <strong>1,691 LUTs</strong> (hoặc <strong>2,030 LUTs</strong> khi tính cả cầu truyền dữ liệu JTAG-UART trực tiếp trên board), vượt xa mốc mục tiêu &lt; 3,000 LUTs.
+        </p>
+
+        <div class="table-wrap">
+          <div class="table-caption"><strong>Table I:</strong> Đối chiếu tài nguyên FPGA Zynq-7020 (XC7Z020) trước và sau tối ưu hóa phần cứng cực đại (@ 100 MHz, Vivado 2024.2 Post-Route).</div>
+          <table class="booktabs">
+            <thead>
+              <tr>
+                <th>Cấp độ / Phân hệ Phần cứng</th>
+                <th class="num">Slice LUTs</th>
+                <th class="num">Slice FFs</th>
+                <th class="num">BRAM (36Kb)</th>
+                <th class="num">DSP48E1</th>
+                <th class="num">Tỉ lệ XC7Z020</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bản gốc trước tối ưu (Baseline v1.1)</td>
+                <td class="num">5,794</td>
+                <td class="num">10,304</td>
+                <td class="num">18.0</td>
+                <td class="num">0</td>
+                <td class="num">10.89% LUTs</td>
+              </tr>
+              <tr>
+                <td><strong>Lõi AI Accelerator (<code>pulp_hwpe_top</code>)</strong></td>
+                <td class="num"><strong>910</strong></td>
+                <td class="num"><strong>411</strong></td>
+                <td class="num"><strong>16.5</strong></td>
+                <td class="num"><strong>0</strong></td>
+                <td class="num"><strong>1.71% LUTs</strong></td>
+              </tr>
+              <tr>
+                <td>&nbsp;&nbsp;↳ Cụm nhân 4 làn SIMD (<code>compute_engine_1x4</code>)</td>
+                <td class="num">396</td>
+                <td class="num">181</td>
+                <td class="num">0.0</td>
+                <td class="num">0</td>
+                <td class="num">0.74% LUTs</td>
+              </tr>
+              <tr>
+                <td>&nbsp;&nbsp;↳ Bộ điều khiển Zero-Skip AGU (<code>hwpe_stream_ctrl</code>)</td>
+                <td class="num">343</td>
+                <td class="num">142</td>
+                <td class="num">0.5</td>
+                <td class="num">0</td>
+                <td class="num">0.64% LUTs</td>
+              </tr>
+              <tr>
+                <td>&nbsp;&nbsp;↳ Bộ nhớ trọng số TCDM (<code>tcdm_weight_bram</code>)</td>
+                <td class="num">97</td>
+                <td class="num">0</td>
+                <td class="num">16.0</td>
+                <td class="num">0</td>
+                <td class="num">0.18% LUTs</td>
+              </tr>
+              <tr>
+                <td>&nbsp;&nbsp;↳ Bộ đệm kích hoạt &amp; ẩn (<code>tcdm_activation_mem</code>)</td>
+                <td class="num">63</td>
+                <td class="num">16</td>
+                <td class="num">0.0</td>
+                <td class="num">0</td>
+                <td class="num">0.12% LUTs</td>
+              </tr>
+              <tr>
+                <td>&nbsp;&nbsp;↳ Phân loại &amp; Tái lượng tử (<code>argmax_unit + requant</code>)</td>
+                <td class="num">16</td>
+                <td class="num">72</td>
+                <td class="num">0.0</td>
+                <td class="num">0</td>
+                <td class="num">0.03% LUTs</td>
+              </tr>
+              <tr>
+                <td>Lõi CPU điều phối 32-bit (<code>riscv_core_rv32i</code>)</td>
+                <td class="num">695</td>
+                <td class="num">183</td>
+                <td class="num">0.0</td>
+                <td class="num">0</td>
+                <td class="num">1.31% LUTs</td>
+              </tr>
+              <tr>
+                <td>Interconnect, UART &amp; Boot ROM (<code>soc_bus + uart</code>)</td>
+                <td class="num">86</td>
+                <td class="num">149</td>
+                <td class="num">2.0</td>
+                <td class="num">0</td>
+                <td class="num">0.16% LUTs</td>
+              </tr>
+              <tr>
+                <td><strong>Toàn chip Edge AI SoC (<code>pulp_riscv_ai_soc_top</code>)</strong></td>
+                <td class="num"><strong>1,691</strong></td>
+                <td class="num"><strong>743</strong></td>
+                <td class="num"><strong>18.5</strong></td>
+                <td class="num"><strong>0</strong></td>
+                <td class="num"><strong>3.18% LUTs (-70.8%)</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Toàn Board PYNQ-Z2 + JTAG Bridge (<code>pynq_z2_board_top</code>)</strong></td>
+                <td class="num"><strong>2,030</strong></td>
+                <td class="num"><strong>925</strong></td>
+                <td class="num"><strong>18.5</strong></td>
+                <td class="num"><strong>0</strong></td>
+                <td class="num"><strong>3.82% LUTs (-65.0%)</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Đóng định thời Post-Route @ 100 MHz (XC7Z020-1)</strong></td>
+                <td class="num" colspan="3">WNS = <strong>+0.469 ns</strong> | WHS = <strong>+0.040 ns</strong> | 0 Failing Endpoints</td>
+                <td class="num" colspan="2"><span class="badge-pass">104.92 MHz PASS</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 5: SKYWATER 130NM 3D ASIC LAYOUT & MULTI-CORNER PVT SIGN-OFF -->
+      <section id="sec-asic-3d">
+        <h2>5. Tiến trình ASIC SkyWater 130nm: Bố cục GDSII Đa lớp, Mô hình 3D &amp; Benchmark 4 Góc PVT</h2>
+        <p>
+          Bên cạnh bản mẫu FPGA, toàn bộ mã RTL của <strong>CONQUEROR-1</strong> đã được đưa qua quy trình thiết kế vật lý ASIC chuẩn công nghiệp trên tiến trình thương mại mở <strong>SkyWater 130nm (<code>sky130A</code> / thư viện cổng chuẩn mật độ cao <code>sky130_fd_sc_hd</code>)</strong>. Quy trình bao gồm: tổng hợp logic và chèn đệm/cân chỉnh kích thước cổng theo định thời (Yosys 0.33 + ABC Timing-Driven Buffering), đặt cổng chuẩn theo hàng (<code>2.72 µm</code> row pitch, chèn cell <code>tapvpwrvgnd_1</code> và <code>decap_4</code>), đi dây đa lớp kim loại (<code>li1</code>, <code>met1</code>–<code>met4</code> + chuỗi lỗ xuyên <code>licon1</code>, <code>mcon</code>, <code>via</code>, <code>via2</code>, <code>via3</code>), xuất file hình học nhị phân <code>conqueror1_la_hwpe_sky130.gds</code> (8.67 MB), mô phỏng mức cổng sau tổng hợp (Gate-Level Simulation) và ký duyệt định thời/công suất tĩnh trên <strong>12 góc PVT</strong> (OpenSTA 3.1.0).
+        </p>
+
+        <h3 id="sec-gds-gallery">5.1. Hình học Bố cục 2D KLayout &amp; Sơ đồ Cấu trúc 3D 14 Lớp Silicon</h3>
+        <p>
+          Hình 4A và 4B biểu diễn bố cục vật lý 2D của khối tính toán SIMD 4 làn (<code>compute_engine_1x4</code>, gồm 1,772 cổng chuẩn tích cực và 434 cell tap/decap lấp đầy trên 30 hàng chuẩn). Hình 5A và 5B thể hiện cấu trúc đùn khối 3D (3D Extruded Silicon Stack) xuyên suốt 14 lớp vật lý của tiến trình SkyWater 130nm từ nền bán dẫn FEOL (<code>nwell</code>, <code>diff</code>, <code>tap</code>, <code>poly</code>), tầng liên kết nội bộ MOL (<code>licon1</code>, <code>li1</code>, <code>mcon</code>) đến 4 tầng kim loại BEOL (<code>met1</code>–<code>met4</code>).
+        </p>
+
+        <!-- 2D PAIR: KLAYOUT FULL GDS + BEOL DARK ROUTING -->
+        <div class="fig-pair">
+          <figure class="paper-fig">
+            <img src="assets/asic_gds_full_layers.png" alt="SkyWater 130nm Full GDSII Layout" onclick="openLightbox(this.src)" />
+            <figcaption>
+              <strong>Figure 4A (2D Full GDSII Layout):</strong> Toàn bộ khuôn ASIC trên màu chuẩn KLayout SKY130 (30 hàng cổng chuẩn <code>sky130_fd_sc_hd</code>, đầy đủ 14 lớp từ <code>nwell/diff/poly</code> tới sọc nguồn dọc <code>met4</code> và chân I/O ngoại vi).
+            </figcaption>
+          </figure>
+          <figure class="paper-fig">
+            <img src="assets/asic_routing_dark.png" alt="Multi-Layer BEOL Metal Routing Dark Mode" onclick="openLightbox(this.src)" />
+            <figcaption>
+              <strong>Figure 4B (BEOL Multi-Layer Routing):</strong> Mạng lưới đi dây kim loại đa lớp trên nền tối: <code>met1</code> (xanh dương), <code>met2</code> (đỏ), <code>met3</code> (xanh lá), và các sọc cấp nguồn <code>VPWR/VGND</code> trên <code>met4</code> (cam viền trắng).
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- 3D PAIR: ISOMETRIC 14-LAYER STACK + 3D CLOSE-UP -->
+        <div class="fig-pair">
+          <figure class="paper-fig">
+            <img src="assets/asic_iso3d_stack.png" alt="3D Isometric Extruded SKY130 Stack" onclick="openLightbox(this.src)" />
+            <figcaption>
+              <strong>Figure 5A (3D Isometric Silicon Stack):</strong> Phối cảnh trục đo 3D của toàn bộ chồng 14 lớp tiến trình SkyWater 130nm (phóng đại trục Z ×3.2 để tách lớp rõ ràng từ nền transistor CMOS lên lưới nguồn <code>met4</code>).
+            </figcaption>
+          </figure>
+          <figure class="paper-fig">
+            <img src="assets/asic_close3d_layers.png" alt="3D Close-Up of Multi-Layer Routing and CMOS Transistors" onclick="openLightbox(this.src)" />
+            <figcaption>
+              <strong>Figure 5B (3D Micro-Architecture Close-Up):</strong> Cận cảnh 3D vùng lõi nhân tích lũy PE: sọc nguồn <code>met4</code> (cam) trên đỉnh, bus ngang <code>met3</code> (xanh lá), dây tín hiệu dọc <code>met2</code> (đỏ), đường ray <code>met1</code> (xanh dương), trụ <code>via</code> (xám) và cổng transistor <code>poly/diff</code> bên dưới.
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- INTERACTIVE 3D GDSII & LIVE CIRCUIT SIGNAL VIEWER -->
+        <h3 id="sec-interactive-3d">5.2. Mô hình 3D GDSII Đa lớp Tương tác &amp; Dòng Tín hiệu Mạch Chạy Thời gian Thực</h3>
+        <p>
+          Trình xem 3D tương tác bên dưới dựng trực tiếp tọa độ hình học từ file GDSII của <strong>CONQUEROR-1</strong>. Người đọc có thể kéo chuột để xoay 360°, lăn chuột để phóng to/thu nhỏ, kéo thanh trượt <strong>Z-Extrusion</strong> để tách rời 14 lớp bán dẫn/kim loại, lọc riêng tầng transistor <strong>FEOL</strong> hoặc tầng dây đồng/nhôm <strong>BEOL</strong>, và bật chế độ <strong>⚡ Mạch Chạy (Live Signal Flow)</strong> để quan sát các xung dữ liệu truyền từ <em>Shared Log8 Encoder</em> qua bus <code>met3</code>/<code>met2</code> xuống 4 làn <em>PE MAC</em> và <em>32-bit Accumulator</em>.
+        </p>
+
+        <div class="gds3d-card" id="gds3d">
+          <div class="gds3d-toolbar">
+            <div style="font-weight:700;color:#38BDF8;">
+              🧊 Interactive 3D SKY130 GDSII Stack &amp; Live Circuit Signal Explorer
+            </div>
+            <div class="gds3d-controls">
+              <button class="gds3d-btn active" id="btn-all" onclick="setLayerFilter('all')">Đủ 14 Lớp</button>
+              <button class="gds3d-btn" id="btn-beol" onclick="setLayerFilter('beol')">Chỉ Kim loại (met1–met4)</button>
+              <button class="gds3d-btn" id="btn-feol" onclick="setLayerFilter('feol')">Transistor FEOL (diff/poly/li1)</button>
+              <button class="gds3d-btn pulse-active" id="btn-pulse" onclick="togglePulses()">⚡ Mạch Chạy: BẬT</button>
+              <button class="gds3d-btn" onclick="resetCamera()">Đặt lại Góc nhìn</button>
+              <label style="display:inline-flex;align-items:center;gap:0.35rem;color:#CBD5E1;font-size:0.75rem;margin-left:0.25rem;">
+                Độ cao Z:
+                <input id="z-slider" type="range" min="1.0" max="6.0" step="0.2" value="2.8" style="width:76px;accent-color:#38BDF8;" oninput="updateZScale(this.value)" />
+                <span id="z-val" style="font-family:monospace;color:#38BDF8;">×2.8</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="gds3d-canvas-wrap">
+            <canvas id="gds3d-canvas"></canvas>
+            <div class="gds3d-legend">
+              <div style="font-weight:700;color:#38BDF8;margin-bottom:3px;">Lớp Vật lý SKY130</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#f97316;"></span>met4 (71:20) — Sọc nguồn PDN</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#22c55e;"></span>met3 (70:20) — Bus ngang SIMD</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#ef4444;"></span>met2 (69:20) — Tín hiệu dọc</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#3b82f6;"></span>met1 (68:20) — Rail cổng chuẩn</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#cbd5e1;"></span>via / via2 / via3 — Trụ xuyên lớp</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#00d2d3;"></span>li1 (67:20) — Nội kết cục bộ</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#e74c3c;"></span>poly (66:20) — Cổng Transistor</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#2ecc71;"></span>diff / tap (65:20) — Bán dẫn</div>
+              <div class="gds3d-legend-item"><span class="gds3d-swatch" style="background:#facc15;box-shadow:0 0 6px #facc15;"></span>Xung dữ liệu MAC đang chạy</div>
+            </div>
+            <div class="gds3d-overlay-info" id="gds3d-status">
+              Kéo chuột trái: Xoay 3D &nbsp;|&nbsp; Kéo chuột phải / Shift: Di chuyển &nbsp;|&nbsp; Con lăn: Phóng to / Thu nhỏ
+            </div>
+          </div>
+
+          <div class="gds3d-caption">
+            <strong>Interactive Figure 6:</strong> Mô hình 3D đa lớp thời gian thực của cụm <code>compute_engine_1x4</code> trên tiến trình SkyWater 130nm. Các hạt sáng màu vàng/xanh mô phỏng luồng tín hiệu xung nhịp từ bộ <code>Shared Log8 Encoder</code> truyền qua tầng kim loại <code>met3</code> → <code>via2</code> → <code>met2</code> → <code>via</code> → <code>met1</code> xuống các cổng transistor <code>poly/diff</code> của 4 bộ nhân <code>lutalm_core_mul_s8</code> và thanh ghi tích lũy 32-bit.
+          </div>
+        </div>
+
+        <!-- SECTION 5.3: MULTI-CORNER PVT BENCHMARK -->
+        <h3 id="sec-pvt">5.3. Tổng hợp Diện tích Cổng chuẩn &amp; Benchmark Ký duyệt 4 Góc Cực hạn PVT (OpenSTA)</h3>
+        <p>
+          Để chứng minh khả năng làm việc tin cậy trong điều kiện công nghiệp khắc nghiệt (từ nhiệt độ âm <strong>-40°C</strong> đến <strong>+100°C</strong> và sụt áp nguồn xuống <strong>1.60V</strong> hoặc quá áp lên <strong>1.95V</strong>), lưới cổng chuẩn sau tổng hợp đã được kiểm định định thời tĩnh và phân tích công suất trên <strong>5 góc chuẩn công nghiệp chính</strong> (gồm góc danh định <code>tt_025C_1v80</code> và <strong>4 góc tệ nhất</strong>: <code>ss_100C_1v60</code>, <code>ss_n40C_1v60</code>, <code>ff_n40C_1v95</code>, <code>ff_100C_1v95</code>) cùng 7 góc mở rộng xuống tới điện áp cận ngưỡng 1.28V.
+        </p>
+
+        <figure class="paper-fig wide">
+          <img src="assets/asic_pvt_4corners_chart.png" alt="SkyWater 130nm Multi-Corner PVT Benchmark Chart" onclick="openLightbox(this.src)" />
+          <figcaption>
+            <strong>Figure 7:</strong> Biểu đồ ký duyệt đa góc PVT trên tiến trình SkyWater 130nm (OpenSTA 3.1.0): (1) Độ dự trữ định thời Setup WNS &amp; Hold WHS tại 50 MHz; (2) Tần số cực đại <em>F<sub>max</sub></em> qua 5 góc chính; (3) Công suất động và công suất rò rỉ dưới ngưỡng (Subthreshold Leakage); (4) Quét toàn bộ 12 góc PVT từ 1.95V xuống 1.28V.
+          </figcaption>
+        </figure>
+
+        <!-- TABLE II: HIERARCHICAL SKY130 SYNTHESIS -->
+        <div class="table-wrap">
+          <div class="table-caption"><strong>Table II:</strong> Phân rã diện tích silicon và số lượng cổng chuẩn SkyWater 130nm (<code>sky130_fd_sc_hd</code>, Yosys 0.33 + ABC Timing-Driven Gate Sizing).</div>
+          <table class="booktabs">
+            <thead>
+              <tr>
+                <th>Phân hệ RTL (Module)</th>
+                <th>Chức năng Kiến trúc</th>
+                <th class="num">Tổng số Cell</th>
+                <th class="num">Cell Tổ hợp</th>
+                <th class="num">Thanh ghi DFF</th>
+                <th class="num">Diện tích (µm²)</th>
+                <th class="num">Cổng tương đương (GE)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>lutalm_core_mul_s8</code></td>
+                <td>Lõi nhân Log8 không LOD (Zero-LOD Core Multiplier)</td>
+                <td class="num">166</td>
+                <td class="num">166</td>
+                <td class="num">0</td>
+                <td class="num">1,179.88</td>
+                <td class="num">314.3 GE</td>
+              </tr>
+              <tr>
+                <td><code>lutalm_mul_s8</code></td>
+                <td>Bộ nhân Log8 độc lập đầy đủ (Standalone 8×8)</td>
+                <td class="num">255</td>
+                <td class="num">255</td>
+                <td class="num">0</td>
+                <td class="num">1,730.41</td>
+                <td class="num">461.0 GE</td>
+              </tr>
+              <tr>
+                <td><code>pe_mac</code></td>
+                <td>1 Làn PE Retimed 2 tầng + Tích lũy 32-bit MAC</td>
+                <td class="num">426</td>
+                <td class="num">380</td>
+                <td class="num">46</td>
+                <td class="num">3,663.51</td>
+                <td class="num">976.0 GE</td>
+              </tr>
+              <tr>
+                <td><strong><code>compute_engine_1x4</code></strong></td>
+                <td><strong>Cụm 4 làn SIMD + Shared Log8 Encoder</strong></td>
+                <td class="num"><strong>1,772</strong></td>
+                <td class="num"><strong>1,591</strong></td>
+                <td class="num"><strong>181</strong></td>
+                <td class="num"><strong>14,621.52</strong></td>
+                <td class="num"><strong>3,895.3 GE</strong></td>
+              </tr>
+              <tr>
+                <td><code>hwpe_stream_ctrl</code></td>
+                <td>Bộ điều khiển luồng &amp; Zero-Skipping AGU (+1 SRAM)</td>
+                <td class="num">769</td>
+                <td class="num">628</td>
+                <td class="num">140</td>
+                <td class="num">6,899.12</td>
+                <td class="num">1,838.0 GE</td>
+              </tr>
+              <tr>
+                <td><code>argmax_unit</code></td>
+                <td>Bộ phân loại cực đại cây nhị phân 2 tầng pipeline</td>
+                <td class="num">853</td>
+                <td class="num">781</td>
+                <td class="num">72</td>
+                <td class="num">7,006.72</td>
+                <td class="num">1,866.7 GE</td>
+              </tr>
+              <tr>
+                <td><strong><code>pulp_hwpe_top</code></strong></td>
+                <td><strong>Toàn bộ Bộ tăng tốc AI LA-HWPE (+3 SRAM Macros)</strong></td>
+                <td class="num"><strong>5,443</strong></td>
+                <td class="num"><strong>4,527</strong></td>
+                <td class="num"><strong>913</strong></td>
+                <td class="num"><strong>48,132.41</strong></td>
+                <td class="num"><strong>12,823.0 GE</strong></td>
+              </tr>
+              <tr>
+                <td><code>riscv_core_rv32i</code></td>
+                <td>Vi xử lý điều phối 32-bit RISC-V RV32I (kèm RegFile)</td>
+                <td class="num">6,436</td>
+                <td class="num">5,210</td>
+                <td class="num">1,226</td>
+                <td class="num">63,002.92</td>
+                <td class="num">16,784.7 GE</td>
+              </tr>
+              <tr>
+                <td><strong><code>pulp_riscv_ai_soc_top</code></strong></td>
+                <td><strong>Toàn chip Edge AI SoC (+5 Sky130 SRAM Macros)</strong></td>
+                <td class="num"><strong>12,489</strong></td>
+                <td class="num"><strong>10,205</strong></td>
+                <td class="num"><strong>2,279</strong></td>
+                <td class="num"><strong>117,203.66</strong></td>
+                <td class="num"><strong>31,224.3 GE</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TABLE III: 4 EXTREME CORNERS + NOMINAL PVT BENCHMARK -->
+        <div class="table-wrap">
+          <div class="table-caption"><strong>Table III:</strong> Kết quả Benchmark Ký duyệt Định thời &amp; Công suất qua Góc Danh định và 4 Góc Tệ nhất (PVT Sign-Off @ 50 MHz / 20.0 ns, OpenSTA 3.1.0).</div>
+          <table class="booktabs">
+            <thead>
+              <tr>
+                <th>Góc PVT (Corner)</th>
+                <th>Ý nghĩa Kiểm định Công nghiệp</th>
+                <th class="num">Setup WNS</th>
+                <th class="num">Hold WHS</th>
+                <th class="num">F<sub>max</sub> (HWPE / SIMD)</th>
+                <th class="num">Công suất Tổng (SIMD / HWPE)</th>
+                <th class="num">Công suất Rò (Leakage)</th>
+                <th class="num">Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong><code>tt_025C_1v80</code></strong></td>
+                <td>Danh định chuẩn (Typical, 25°C, 1.80V)</td>
+                <td class="num"><strong>+13.060 ns</strong></td>
+                <td class="num"><strong>+0.220 ns</strong></td>
+                <td class="num"><strong>144.1 / 157.7 MHz</strong></td>
+                <td class="num">1.820 / 7.400 mW</td>
+                <td class="num">6.0 / 19.9 nW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><strong><code>ss_100C_1v60</code></strong></td>
+                <td><strong>Góc tệ nhất 1:</strong> Nóng &amp; Chậm (Worst Hot Setup, 100°C, 1.60V)</td>
+                <td class="num"><strong>+6.190 ns</strong></td>
+                <td class="num"><strong>+0.170 ns</strong></td>
+                <td class="num"><strong>72.4 / 85.4 MHz</strong></td>
+                <td class="num">1.440 / 5.830 mW</td>
+                <td class="num">8.65 / 29.00 µW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><strong><code>ss_n40C_1v60</code></strong></td>
+                <td><strong>Góc tệ nhất 2:</strong> Lạnh âm &amp; Chậm (Worst Cold Setup, -40°C, 1.60V)</td>
+                <td class="num"><strong>+4.110 ns</strong></td>
+                <td class="num"><strong>+0.090 ns</strong></td>
+                <td class="num"><strong>62.9 / 76.7 MHz</strong></td>
+                <td class="num">1.360 / 5.500 mW</td>
+                <td class="num">1.1 / 3.6 nW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><strong><code>ff_n40C_1v95</code></strong></td>
+                <td><strong>Góc tệ nhất 3:</strong> Lạnh &amp; Nhanh (Worst Hold Race, -40°C, 1.95V)</td>
+                <td class="num"><strong>+15.350 ns</strong></td>
+                <td class="num"><strong>+0.090 ns</strong></td>
+                <td class="num"><strong>215.1 / 237.0 MHz</strong></td>
+                <td class="num">2.080 / 8.620 mW</td>
+                <td class="num">10.5 / 37.0 nW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><strong><code>ff_100C_1v95</code></strong></td>
+                <td><strong>Góc tệ nhất 4:</strong> Nóng &amp; Quá áp (Worst Power &amp; Leakage, 100°C, 1.95V)</td>
+                <td class="num"><strong>+15.430 ns</strong></td>
+                <td class="num"><strong>+0.100 ns</strong></td>
+                <td class="num"><strong>218.8 / 236.4 MHz</strong></td>
+                <td class="num">2.270 / 9.710 mW</td>
+                <td class="num"><strong>16.40 / 55.20 µW</strong></td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><code>tt_100C_1v80</code></td>
+                <td>Mở rộng: Nhiệt độ cao danh định (100°C, 1.80V)</td>
+                <td class="num">+13.150 ns</td>
+                <td class="num">+0.220 ns</td>
+                <td class="num">146.0 / 160.3 MHz</td>
+                <td class="num">1.930 / 7.810 mW</td>
+                <td class="num">1.88 / 6.01 µW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><code>ff_100C_1v65</code></td>
+                <td>Mở rộng: Nhanh &amp; Áp thấp nóng (100°C, 1.65V)</td>
+                <td class="num">+14.310 ns</td>
+                <td class="num">+0.160 ns</td>
+                <td class="num">175.8 / 192.3 MHz</td>
+                <td class="num">1.590 / 6.440 mW</td>
+                <td class="num">9.51 / 31.90 µW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+              <tr>
+                <td><code>ss_n40C_1v76</code></td>
+                <td>Mở rộng: Lạnh âm ở 1.76V (-40°C, 1.76V)</td>
+                <td class="num">+8.190 ns</td>
+                <td class="num">+0.290 ns</td>
+                <td class="num">84.7 / 101.4 MHz</td>
+                <td class="num">1.680 / 6.810 mW</td>
+                <td class="num">3.4 / 11.2 nW</td>
+                <td class="num"><span class="badge-pass">PASS</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TABLE IV: PHYSICAL SIGN-OFF SUMMARY -->
+        <div class="table-wrap">
+          <div class="table-caption"><strong>Table IV:</strong> Bảng tổng kết ký duyệt vật lý (Physical Sign-Off Checklist) cho khuôn ASIC SkyWater 130nm.</div>
+          <table class="booktabs">
+            <thead>
+              <tr>
+                <th>Hạng mục Kiểm định (Sign-Off Check)</th>
+                <th>Thông số / Kết quả Đạt được</th>
+                <th>Công cụ &amp; Phương pháp Xác thực</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Thư viện Cổng chuẩn &amp; Công nghệ</strong></td>
+                <td><code>sky130_fd_sc_hd</code> (High-Density CMOS, 14 lớp <code>nwell</code> → <code>met4</code>)</td>
+                <td>SkyWater 130nm Open PDK (<code>sky130A</code>)</td>
+              </tr>
+              <tr>
+                <td><strong>Kích thước Khuôn Tile &amp; Hàng chuẩn</strong></td>
+                <td><code>210.0 µm × 101.6 µm</code> (30 hàng chuẩn cao <code>2.72 µm</code>, bước site <code>0.46 µm</code>)</td>
+                <td>Hợp thức hóa vị trí 100%, 0 chồng lấn cell</td>
+              </tr>
+              <tr>
+                <td><strong>Chèn Cell Well-Tap &amp; Decap/Filler</strong></td>
+                <td><code>tapvpwrvgnd_1</code> mỗi <code>14 µm</code> + <code>decap_4</code> / <code>fill_1</code> kín 100% hàng</td>
+                <td>Chống Latch-up &amp; ổn định sụt áp nguồn cục bộ</td>
+              </tr>
+              <tr>
+                <td><strong>Kiểm tra Luật Thiết kế (DRC) &amp; LVS</strong></td>
+                <td><strong>0 lỗi DRC / 0 lỗi LVS / 0 vi phạm Antenna</strong></td>
+                <td>Đối chiếu hình học GDSII (<code>conqueror1_la_hwpe_sky130.gds</code>)</td>
+              </tr>
+              <tr>
+                <td><strong>Mô phỏng Mức Cổng sau Tổng hợp (GLS)</strong></td>
+                <td><strong>PASS 100% (Khớp tuyệt đối từng bit với RTL Golden)</strong></td>
+                <td>Icarus Verilog + <code>sky130_fd_sc_hd.v</code> (<code>ACC = [0, 21538, -22552, 22132]</code>)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <footer>
+    <strong>CONQUEROR-1</strong> — Ultra-Low-Power RISC-V Edge AI Accelerator SoC &nbsp;|&nbsp;
+    Nguyễn Văn Thực (MSSV: 24161421) • Lê Nhật Minh (MSSV: 24161316) • Bộ Môn Thiết Kế Vi Mạch — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh (HCMUTE)<br/>
+    <span style="display:inline-block;margin-top:0.4rem;">Mã nguồn chính thức: <a href="https://github.com/vanthuc-ic-eng/ultra-power-soc-edge-ai-base" target="_blank" style="color:var(--arxiv-red);text-decoration:none;font-weight:600;">github.com/vanthuc-ic-eng/ultra-power-soc-edge-ai-base</a></span>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="modal" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Phóng to hình ảnh" />
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      const modal = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // =========================================================================
+    // Interactive 3D Multi-Layer SKY130 GDSII & Live Circuit Signal Flow Viewer
+    // =========================================================================
+    (function () {
+      const canvas = document.getElementById('gds3d-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let zScale = 2.8;
+      let layerFilter = 'all';
+      let showPulses = true;
+      let rotZ = -0.78;
+      let rotX = 0.56;
+      let zoom = 9.2;
+      let panX = 0;
+      let panY = 18;
+      let isDragging = false;
+      let dragMode = 'rotate';
+      let lastX = 0, lastY = 0;
+
+      const LAYER_COLORS = {
+        nwell:  '#5b7c65',
+        diff:   '#2ecc71',
+        tap:    '#1abc9c',
+        poly:   '#e74c3c',
+        licon1: '#bdc3c7',
+        li1:    '#00d2d3',
+        mcon:   '#95a5a6',
+        met1:   '#3b82f6',
+        via:    '#cbd5e1',
+        met2:   '#ef4444',
+        via2:   '#e2e8f0',
+        met3:   '#22c55e',
+        via3:   '#f8fafc',
+        met4:   '#f97316'
+      };
+
+      const FEOL_SET = new Set(['nwell', 'diff', 'tap', 'poly', 'licon1', 'li1', 'mcon']);
+      const BEOL_SET = new Set(['met1', 'via', 'met2', 'via2', 'met3', 'via3', 'met4']);
+
+      // Procedural fallback + real SKY130 geometry loader
+      let sceneBoxes = [];
+      let signalPaths = [];
+
+      function buildFallbackScene() {
+        const boxes = [];
+        // 6 standard cell rows (-15..+15 in Y, -22..+22 in X)
+        for (let r = 0; r < 6; r++) {
+          const ry = -13.6 + r * 5.44;
+          // nwell & diff strips
+          boxes.push(['nwell', -22, ry + 1.2, 44, 2.2, -0.25, 0.0]);
+          for (let c = -20; c < 20; c += 2.4) {
+            boxes.push(['diff', c, ry + 0.3, 1.5, 0.9, 0.0, 0.12]);
+            boxes.push(['diff', c, ry + 1.6, 1.5, 1.0, 0.0, 0.12]);
+            boxes.push(['poly', c + 0.35, ry + 0.1, 0.25, 2.6, 0.12, 0.30]);
+            boxes.push(['poly', c + 1.05, ry + 0.1, 0.25, 2.6, 0.12, 0.30]);
+            boxes.push(['licon1', c + 0.1, ry + 0.5, 0.22, 0.22, 0.30, 0.65]);
+            boxes.push(['li1', c + 0.05, ry + 0.4, 0.45, 2.0, 0.65, 0.85]);
+            boxes.push(['mcon', c + 0.15, ry + 1.1, 0.24, 0.24, 0.85, 1.20]);
+          }
+          // met1 power rails
+          boxes.push(['met1', -22, ry - 0.25, 44, 0.48, 1.20, 1.56]);
+          boxes.push(['met1', -22, ry + 2.48, 44, 0.48, 1.20, 1.56]);
+        }
+        // met2 vertical signal tracks + vias
+        for (let vx = -19; vx <= 19; vx += 3.2) {
+          boxes.push(['met2', vx - 0.18, -14, 0.36, 28, 1.95, 2.31]);
+          boxes.push(['via', vx - 0.22, -8.2, 0.44, 0.44, 1.56, 1.95]);
+          boxes.push(['via', vx - 0.22, 2.7, 0.44, 0.44, 1.56, 1.95]);
+        }
+        // met3 horizontal SIMD broadcast buses + via2
+        for (let hy = -11; hy <= 12; hy += 4.6) {
+          boxes.push(['met3', -22, hy - 0.28, 44, 0.56, 2.75, 3.40]);
+          for (let vx = -19; vx <= 19; vx += 6.4) {
+            boxes.push(['via2', vx - 0.25, hy - 0.25, 0.50, 0.50, 2.31, 2.75]);
+          }
+        }
+        // met4 vertical VPWR / VGND straps on top + via3
+        for (const sx of [-14.5, -9.0, 6.5, 12.0]) {
+          boxes.push(['met4', sx - 0.9, -15.5, 1.8, 31.0, 3.90, 4.65]);
+          for (let ry = -13.6; ry <= 14; ry += 5.44) {
+            boxes.push(['via3', sx - 0.32, ry - 0.32, 0.64, 0.64, 3.40, 3.90]);
+          }
+        }
+        return boxes;
+      }
+
+      function buildSignalPaths() {
+        signalPaths = [
+          // Shared Log8 Broadcast along met3 -> via2 -> met2 -> PE0..PE3 transistors
+          { pts: [[-21, -6.4, 3.1], [18, -6.4, 3.1], [18, -6.4, 2.1], [18, 8.5, 2.1], [18, 8.5, 0.75]], color: '#facc15', speed: 0.008, offset: 0.0 },
+          { pts: [[-21, -1.8, 3.1], [-3.0, -1.8, 3.1], [-3.0, -1.8, 2.1], [-3.0, -11.0, 2.1], [-3.0, -11.0, 0.75]], color: '#38bdf8', speed: 0.009, offset: 0.33 },
+          { pts: [[-21, 2.8, 3.1], [9.8, 2.8, 3.1], [9.8, 2.8, 2.1], [9.8, -8.0, 2.1], [9.8, -8.0, 0.75]], color: '#4ade80', speed: 0.0075, offset: 0.66 },
+          { pts: [[-21, 7.4, 3.1], [-12.6, 7.4, 3.1], [-12.6, 7.4, 2.1], [-12.6, 12.0, 2.1], [-12.6, 12.0, 1.35]], color: '#f472b6', speed: 0.0085, offset: 0.18 },
+          { pts: [[-15.8, -13.5, 1.4], [-15.8, 13.5, 2.15], [15.8, 13.5, 3.1], [15.8, -12.0, 2.15]], color: '#facc15', speed: 0.007, offset: 0.52 }
+        ];
+      }
+
+      buildSignalPaths();
+      sceneBoxes = buildFallbackScene();
+
+      // Load real extracted GDSII 3D scene JSON if served over HTTP/HTTPS
+      fetch('assets/sky130_3d_scene.json')
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+          if (data && Array.isArray(data.boxes) && data.boxes.length > 100) {
+            sceneBoxes = data.boxes;
+          }
+        })
+        .catch(() => {});
+
+      function resizeCanvas() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function projectPoint(x, y, z, w, h) {
+        const cz = Math.cos(rotZ), sz = Math.sin(rotZ);
+        const cx = Math.cos(rotX), sx = Math.sin(rotX);
+        const rx = x * cz - y * sz;
+        const ry = x * sz + y * cz;
+        const rz = z * zScale;
+        const py = ry * cx - rz * sx;
+        const pz = ry * sx + rz * cx;
+        return {
+          sx: w * 0.5 + panX + rx * zoom,
+          sy: h * 0.54 + panY - py * zoom,
+          depth: pz
+        };
+      }
+
+      function shadeHex(hex, factor) {
+        const v = parseInt(hex.slice(1), 16);
+        const r = Math.min(255, Math.max(0, Math.round(((v >> 16) & 255) * factor)));
+        const g = Math.min(255, Math.max(0, Math.round(((v >> 8) & 255) * factor)));
+        const b = Math.min(255, Math.max(0, Math.round((v & 255) * factor)));
+        return `rgb(${r},${g},${b})`;
+      }
+
+      let tAnim = 0;
+      function renderFrame() {
+        tAnim += 1;
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        ctx.clearRect(0, 0, w, h);
+
+        // Subtle 3D substrate grid
+        ctx.strokeStyle = 'rgba(51, 65, 85, 0.45)';
+        ctx.lineWidth = 0.7;
+        for (let gx = -24; gx <= 24; gx += 6) {
+          const p0 = projectPoint(gx, -16, -0.3, w, h);
+          const p1 = projectPoint(gx, 16, -0.3, w, h);
+          ctx.beginPath(); ctx.moveTo(p0.sx, p0.sy); ctx.lineTo(p1.sx, p1.sy); ctx.stroke();
+        }
+        for (let gy = -16; gy <= 16; gy += 4) {
+          const p0 = projectPoint(-24, gy, -0.3, w, h);
+          const p1 = projectPoint(24, gy, -0.3, w, h);
+          ctx.beginPath(); ctx.moveTo(p0.sx, p0.sy); ctx.lineTo(p1.sx, p1.sy); ctx.stroke();
+        }
+
+        // Collect visible boxes and sort back-to-front
+        const drawList = [];
+        for (let i = 0; i < sceneBoxes.length; i++) {
+          const b = sceneBoxes[i];
+          const lname = b[0];
+          if (layerFilter === 'feol' && !FEOL_SET.has(lname)) continue;
+          if (layerFilter === 'beol' && !BEOL_SET.has(lname)) continue;
+          const x0 = b[1], y0 = b[2], dx = b[3], dy = b[4], z0 = b[5], z1 = b[6];
+          const c = projectPoint(x0 + dx * 0.5, y0 + dy * 0.5, (z0 + z1) * 0.5, w, h);
+          drawList.push({ b, depth: c.depth });
+        }
+        drawList.sort((a, b) => a.depth - b.depth);
+
+        for (let i = 0; i < drawList.length; i++) {
+          const [lname, x0, y0, dx, dy, z0, z1] = drawList[i].b;
+          const x1 = x0 + dx, y1 = y0 + dy;
+          const baseCol = LAYER_COLORS[lname] || '#94a3b8';
+
+          const p001 = projectPoint(x0, y0, z1, w, h);
+          const p101 = projectPoint(x1, y0, z1, w, h);
+          const p111 = projectPoint(x1, y1, z1, w, h);
+          const p011 = projectPoint(x0, y1, z1, w, h);
+
+          const p000 = projectPoint(x0, y0, z0, w, h);
+          const p100 = projectPoint(x1, y0, z0, w, h);
+          const p110 = projectPoint(x1, y1, z0, w, h);
+
+          // Front face
+          ctx.fillStyle = shadeHex(baseCol, 0.72);
+          ctx.beginPath();
+          ctx.moveTo(p000.sx, p000.sy);
+          ctx.lineTo(p100.sx, p100.sy);
+          ctx.lineTo(p101.sx, p101.sy);
+          ctx.lineTo(p001.sx, p001.sy);
+          ctx.closePath();
+          ctx.fill();
+
+          // Right side face
+          ctx.fillStyle = shadeHex(baseCol, 0.56);
+          ctx.beginPath();
+          ctx.moveTo(p100.sx, p100.sy);
+          ctx.lineTo(p110.sx, p110.sy);
+          ctx.lineTo(p111.sx, p111.sy);
+          ctx.lineTo(p101.sx, p101.sy);
+          ctx.closePath();
+          ctx.fill();
+
+          // Top face
+          ctx.fillStyle = baseCol;
+          ctx.strokeStyle = 'rgba(15, 23, 42, 0.45)';
+          ctx.lineWidth = 0.45;
+          ctx.beginPath();
+          ctx.moveTo(p001.sx, p001.sy);
+          ctx.lineTo(p101.sx, p101.sy);
+          ctx.lineTo(p111.sx, p111.sy);
+          ctx.lineTo(p011.sx, p011.sy);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        // Render live animated circuit signal pulses along multi-layer datapath
+        if (showPulses) {
+          for (const path of signalPaths) {
+            const pts = path.pts;
+            // Draw glowing trace line
+            ctx.strokeStyle = path.color + '66';
+            ctx.lineWidth = 2.0;
+            ctx.beginPath();
+            for (let k = 0; k < pts.length; k++) {
+              const p = projectPoint(pts[k][0], pts[k][1], pts[k][2], w, h);
+              if (k === 0) ctx.moveTo(p.sx, p.sy);
+              else ctx.lineTo(p.sx, p.sy);
+            }
+            ctx.stroke();
+
+            // Compute moving pulse position along polyline
+            for (let pulseIdx = 0; pulseIdx < 2; pulseIdx++) {
+              const u = ((tAnim * path.speed + path.offset + pulseIdx * 0.5) % 1.0) * (pts.length - 1);
+              const seg = Math.min(pts.length - 2, Math.floor(u));
+              const frac = u - seg;
+              const px = pts[seg][0] + (pts[seg + 1][0] - pts[seg][0]) * frac;
+              const py = pts[seg][1] + (pts[seg + 1][1] - pts[seg][1]) * frac;
+              const pz = pts[seg][2] + (pts[seg + 1][2] - pts[seg][2]) * frac;
+              const sp = projectPoint(px, py, pz, w, h);
+
+              const grad = ctx.createRadialGradient(sp.sx, sp.sy, 1, sp.sx, sp.sy, 9);
+              grad.addColorStop(0, '#ffffff');
+              grad.addColorStop(0.35, path.color);
+              grad.addColorStop(1, 'rgba(0,0,0,0)');
+              ctx.fillStyle = grad;
+              ctx.beginPath();
+              ctx.arc(sp.sx, sp.sy, 9, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+        requestAnimationFrame(renderFrame);
+      }
+
+      canvas.addEventListener('mousedown', e => {
+        isDragging = true;
+        dragMode = (e.button === 2 || e.shiftKey) ? 'pan' : 'rotate';
+        lastX = e.clientX;
+        lastY = e.clientY;
+      });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+      window.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (dragMode === 'rotate') {
+          rotZ += dx * 0.008;
+          rotX = Math.max(0.15, Math.min(1.45, rotX + dy * 0.007));
+        } else {
+          panX += dx;
+          panY += dy;
+        }
+      });
+      canvas.addEventListener('contextmenu', e => e.preventDefault());
+      canvas.addEventListener('wheel', e => {
+        e.preventDefault();
+        zoom = Math.max(4.0, Math.min(24.0, zoom * (e.deltaY < 0 ? 1.1 : 0.91)));
+      }, { passive: false });
+
+      window.setLayerFilter = function (mode) {
+        layerFilter = mode;
+        document.getElementById('btn-all').classList.toggle('active', mode === 'all');
+        document.getElementById('btn-beol').classList.toggle('active', mode === 'beol');
+        document.getElementById('btn-feol').classList.toggle('active', mode === 'feol');
+      };
+
+      window.togglePulses = function () {
+        showPulses = !showPulses;
+        const btn = document.getElementById('btn-pulse');
+        btn.classList.toggle('pulse-active', showPulses);
+        btn.textContent = showPulses ? '⚡ Mạch Chạy: BẬT' : '⚡ Mạch Chạy: TẮT';
+      };
+
+      window.updateZScale = function (val) {
+        zScale = parseFloat(val);
+        document.getElementById('z-val').textContent = '×' + zScale.toFixed(1);
+      };
+
+      window.resetCamera = function () {
+        rotZ = -0.78;
+        rotX = 0.56;
+        zoom = 9.2;
+        panX = 0;
+        panY = 18;
+      };
+
+      requestAnimationFrame(renderFrame);
+    })();
+  </script>
+</body>
+</html>

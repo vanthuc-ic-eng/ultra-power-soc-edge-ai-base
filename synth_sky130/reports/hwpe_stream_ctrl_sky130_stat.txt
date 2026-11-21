@@ -1,0 +1,1657 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `
+read_liberty -lib /tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib;
+read_verilog -sv -DYOSYS -DASIC_SYNTH -DYOSYS_BBOX /workspace/projects/pulp_edge_ai_soc/rtl/pkg/pulp_hwpe_pkg.sv /workspace/projects/pulp_edge_ai_soc/rtl/memory/sky130_sram_blackboxes.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/lut_primitives.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/icg_cell.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_input_sign_u8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_encoder_u8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_normalizer_u8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low2.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low3.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low4.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_adaptive64.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_converter_u8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_act_encoder_u8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_adder_u8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_antilog_u16.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/log_output_sign_s16.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_core_mul_s8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_mul_s8.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/pe_mac.sv /workspace/projects/pulp_edge_ai_soc/rtl/core/compute_engine_1x4.sv /workspace/projects/pulp_edge_ai_soc/rtl/controller/requant_relu.sv /workspace/projects/pulp_edge_ai_soc/rtl/controller/argmax_unit.sv /workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv /workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_activation_mem.sv /workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_bias_mem.sv /workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_weight_bram.sv /workspace/projects/pulp_edge_ai_soc/rtl/top/pulp_hwpe_top.sv /workspace/projects/pulp_edge_ai_soc/rtl/soc/hwpe_csr_wrapper.sv /workspace/projects/pulp_edge_ai_soc/rtl/soc/riscv_core_rv32i.sv /workspace/projects/pulp_edge_ai_soc/rtl/soc/soc_bus_interconnect.sv /workspace/projects/pulp_edge_ai_soc/rtl/soc/uart_tx.sv /workspace/projects/pulp_edge_ai_soc/rtl/soc/pulp_riscv_ai_soc_top.sv;
+synth -top hwpe_stream_ctrl -flatten;
+dfflibmap -liberty /tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib;
+abc -liberty /tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -D 4000 -script +strash;ifraig;scorr;dc2;dretime;strash;&get,-n;&dch,-f;&nf,{D};&put;buffer;upsize,{D};dnsize,{D};stime,-p;
+hilomap -hicell sky130_fd_sc_hd__conb_1 HI -locell sky130_fd_sc_hd__conb_1 LO;
+opt_clean -purge;
+stat -liberty /tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+' --
+
+1. Executing Liberty frontend: /tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/pkg/pulp_hwpe_pkg.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/pkg/pulp_hwpe_pkg.sv' to AST representation.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/memory/sky130_sram_blackboxes.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/memory/sky130_sram_blackboxes.sv' to AST representation.
+Generating RTLIL representation for module `\sky130_sram_1kbyte_1rw1r_8x1024_8'.
+Generating RTLIL representation for module `\sky130_sram_1kbyte_1rw1r_10x1024_macro'.
+Generating RTLIL representation for module `\sky130_sram_wmem_16kx32_macro'.
+Generating RTLIL representation for module `\sky130_sram_4kbyte_1rw1r_32x1024_macro'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/lut_primitives.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/lut_primitives.sv' to AST representation.
+Generating RTLIL representation for module `\lut_adder_n'.
+Generating RTLIL representation for module `\lut_inc_n'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/icg_cell.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/icg_cell.sv' to AST representation.
+Generating RTLIL representation for module `\icg_cell'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_input_sign_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_input_sign_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_input_sign_u8'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_encoder_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_encoder_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_encoder_u8'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_normalizer_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_normalizer_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_normalizer_u8'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low2.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low2.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_low2'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low3.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low3.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_low3'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low4.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low4.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_low4'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_adaptive64.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_adaptive64.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_adaptive64'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_converter_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_converter_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_converter_u8'.
+Successfully finished Verilog frontend.
+
+14. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_act_encoder_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_act_encoder_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_act_encoder_u8'.
+Successfully finished Verilog frontend.
+
+15. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_adder_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_adder_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_adder_u8'.
+Successfully finished Verilog frontend.
+
+16. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_antilog_u16.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_antilog_u16.sv' to AST representation.
+Generating RTLIL representation for module `\log_antilog_u16'.
+Successfully finished Verilog frontend.
+
+17. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_output_sign_s16.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_output_sign_s16.sv' to AST representation.
+Generating RTLIL representation for module `\log_output_sign_s16'.
+Successfully finished Verilog frontend.
+
+18. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_core_mul_s8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_core_mul_s8.sv' to AST representation.
+Generating RTLIL representation for module `\lutalm_core_mul_s8'.
+Successfully finished Verilog frontend.
+
+19. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_mul_s8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_mul_s8.sv' to AST representation.
+Generating RTLIL representation for module `\lutalm_mul_s8'.
+Successfully finished Verilog frontend.
+
+20. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/pe_mac.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/pe_mac.sv' to AST representation.
+Generating RTLIL representation for module `\pe_mac'.
+Successfully finished Verilog frontend.
+
+21. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/compute_engine_1x4.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/compute_engine_1x4.sv' to AST representation.
+Generating RTLIL representation for module `\compute_engine_1x4'.
+Successfully finished Verilog frontend.
+
+22. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/controller/requant_relu.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/controller/requant_relu.sv' to AST representation.
+Generating RTLIL representation for module `\requant_relu'.
+Successfully finished Verilog frontend.
+
+23. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/controller/argmax_unit.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/controller/argmax_unit.sv' to AST representation.
+Generating RTLIL representation for module `\argmax_unit'.
+Successfully finished Verilog frontend.
+
+24. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv' to AST representation.
+Generating RTLIL representation for module `\hwpe_stream_ctrl'.
+Successfully finished Verilog frontend.
+
+25. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_activation_mem.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_activation_mem.sv' to AST representation.
+Generating RTLIL representation for module `\tcdm_activation_mem'.
+Successfully finished Verilog frontend.
+
+26. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_bias_mem.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_bias_mem.sv' to AST representation.
+Generating RTLIL representation for module `\tcdm_bias_mem'.
+Successfully finished Verilog frontend.
+
+27. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_weight_bram.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/memory/tcdm_weight_bram.sv' to AST representation.
+Generating RTLIL representation for module `\tcdm_weight_bram'.
+Successfully finished Verilog frontend.
+
+28. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/top/pulp_hwpe_top.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/top/pulp_hwpe_top.sv' to AST representation.
+Generating RTLIL representation for module `\pulp_hwpe_top'.
+Successfully finished Verilog frontend.
+
+29. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/soc/hwpe_csr_wrapper.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/soc/hwpe_csr_wrapper.sv' to AST representation.
+Generating RTLIL representation for module `\hwpe_csr_wrapper'.
+Successfully finished Verilog frontend.
+
+30. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/soc/riscv_core_rv32i.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/soc/riscv_core_rv32i.sv' to AST representation.
+Generating RTLIL representation for module `\riscv_core_rv32i'.
+Successfully finished Verilog frontend.
+
+31. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/soc/soc_bus_interconnect.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/soc/soc_bus_interconnect.sv' to AST representation.
+Generating RTLIL representation for module `\soc_bus_interconnect'.
+Successfully finished Verilog frontend.
+
+32. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/soc/uart_tx.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/soc/uart_tx.sv' to AST representation.
+Generating RTLIL representation for module `\uart_tx'.
+Successfully finished Verilog frontend.
+
+33. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/soc/pulp_riscv_ai_soc_top.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/soc/pulp_riscv_ai_soc_top.sv' to AST representation.
+Generating RTLIL representation for module `\pulp_riscv_ai_soc_top'.
+Successfully finished Verilog frontend.
+
+34. Executing SYNTH pass.
+
+34.1. Executing HIERARCHY pass (managing design hierarchy).
+
+34.1.1. Analyzing design hierarchy..
+Top module:  \hwpe_stream_ctrl
+
+34.1.2. Analyzing design hierarchy..
+Top module:  \hwpe_stream_ctrl
+Removing unused module `\pulp_riscv_ai_soc_top'.
+Removing unused module `\uart_tx'.
+Removing unused module `\soc_bus_interconnect'.
+Removing unused module `\riscv_core_rv32i'.
+Removing unused module `\hwpe_csr_wrapper'.
+Removing unused module `\pulp_hwpe_top'.
+Removing unused module `\tcdm_weight_bram'.
+Removing unused module `\tcdm_bias_mem'.
+Removing unused module `\tcdm_activation_mem'.
+Removing unused module `\argmax_unit'.
+Removing unused module `\requant_relu'.
+Removing unused module `\compute_engine_1x4'.
+Removing unused module `\pe_mac'.
+Removing unused module `\lutalm_mul_s8'.
+Removing unused module `\lutalm_core_mul_s8'.
+Removing unused module `\log_output_sign_s16'.
+Removing unused module `\log_antilog_u16'.
+Removing unused module `\log_adder_u8'.
+Removing unused module `\log_act_encoder_u8'.
+Removing unused module `\log_lut_converter_u8'.
+Removing unused module `\log_lut_adaptive64'.
+Removing unused module `\log_lut_low4'.
+Removing unused module `\log_lut_low3'.
+Removing unused module `\log_lut_low2'.
+Removing unused module `\log_normalizer_u8'.
+Removing unused module `\log_encoder_u8'.
+Removing unused module `\log_input_sign_u8'.
+Removing unused module `\icg_cell'.
+Removing unused module `\lut_inc_n'.
+Removing unused module `\lut_adder_n'.
+Removed 30 unused modules.
+
+34.2. Executing PROC pass (convert processes to netlists).
+
+34.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+34.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 5 switch rules as full_case in process $proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212 in module hwpe_stream_ctrl.
+Marked 9 switch rules as full_case in process $proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200 in module hwpe_stream_ctrl.
+Marked 1 switch rules as full_case in process $proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:156$198 in module hwpe_stream_ctrl.
+Marked 2 switch rules as full_case in process $proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:145$193 in module hwpe_stream_ctrl.
+Removed a total of 0 dead cases.
+
+34.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 3 assignments to connections.
+
+34.2.4. Executing PROC_INIT pass (extract init attributes).
+
+34.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+Found async reset \rst_n in `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:156$198'.
+Found async reset \rst_n in `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:145$193'.
+
+34.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~19 debug messages>
+
+34.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+     1/21: $0\l1_wb_we_o[0:0]
+     2/21: $0\pe_valid_o[0:0]
+     3/21: $0\pe_clr_o[0:0]
+     4/21: $0\stream_valid_pipe[0:0]
+     5/21: $0\scan_valid_pipe[0:0]
+     6/21: $0\scan_idx_pipe[9:0]
+     7/21: $0\scan_k_q[9:0]
+     8/21: $0\first_nz_idx_q[9:0]
+     9/21: $0\sparse_ptr_q[9:0]
+    10/21: $0\nz_len_q[9:0]
+    11/21: $0\l2_drain_step_q[1:0]
+    12/21: $0\l2_k_q[5:0]
+    13/21: $0\l2_grp_q[1:0]
+    14/21: $0\l1_grp_q[3:0]
+    15/21: $0\pe_sel_l2_o[0:0]
+    16/21: $0\l2_bias_grp_o[1:0]
+    17/21: $0\l1_bias_grp_o[3:0]
+    18/21: $0\l2_in_addr_o[5:0]
+    19/21: $0\l1_wb_addr_o[5:0]
+    20/21: $0\l1_in_addr_o[9:0]
+    21/21: $0\w_addr_o[13:0]
+Creating decoders for process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200'.
+     1/11: $9\state_d[3:0]
+     2/11: $8\state_d[3:0]
+     3/11: $7\state_d[3:0]
+     4/11: $6\state_d[3:0]
+     5/11: $5\state_d[3:0]
+     6/11: $4\state_d[3:0]
+     7/11: $3\state_d[3:0]
+     8/11: $2\state_d[3:0]
+     9/11: $1\state_d[3:0]
+    10/11: $1\busy_o[0:0]
+    11/11: $1\done_o[0:0]
+Creating decoders for process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:156$198'.
+     1/1: $0\state_q[3:0]
+Creating decoders for process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:145$193'.
+     1/1: $0\cycle_count_o[31:0]
+
+34.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\hwpe_stream_ctrl.\busy_o' from process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200'.
+No latch inferred for signal `\hwpe_stream_ctrl.\done_o' from process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200'.
+No latch inferred for signal `\hwpe_stream_ctrl.\state_d' from process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200'.
+
+34.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\hwpe_stream_ctrl.\w_addr_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$845' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l1_in_addr_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$846' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l1_wb_we_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$847' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l1_wb_addr_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$848' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l2_in_addr_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$849' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l1_bias_grp_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$850' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l2_bias_grp_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$851' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\pe_clr_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$852' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\pe_valid_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$853' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\pe_sel_l2_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$854' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l1_grp_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$855' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l2_grp_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$856' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l2_k_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$857' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\l2_drain_step_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$858' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\nz_len_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$859' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\sparse_ptr_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$860' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\first_nz_idx_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$861' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\scan_k_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$862' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\scan_idx_pipe' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$863' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\scan_valid_pipe' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$864' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\stream_valid_pipe' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+  created $adff cell `$procdff$865' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\state_q' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:156$198'.
+  created $adff cell `$procdff$866' with positive edge clock and negative level reset.
+Creating register for signal `\hwpe_stream_ctrl.\cycle_count_o' using process `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:145$193'.
+  created $adff cell `$procdff$867' with positive edge clock and negative level reset.
+
+34.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+34.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+Removing empty process `hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:239$212'.
+Found and cleaned up 9 empty switches in `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200'.
+Removing empty process `hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:0$200'.
+Removing empty process `hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:156$198'.
+Found and cleaned up 2 empty switches in `\hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:145$193'.
+Removing empty process `hwpe_stream_ctrl.$proc$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:145$193'.
+Cleaned up 19 empty switches.
+
+34.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~23 debug messages>
+
+34.3. Executing FLATTEN pass (flatten design).
+
+34.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~1 debug messages>
+
+34.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 4 unused cells and 82 unused wires.
+<suppressed ~6 debug messages>
+
+34.6. Executing CHECK pass (checking for obvious problems).
+Checking module hwpe_stream_ctrl...
+Found and reported 0 problems.
+
+34.7. Executing OPT pass (performing simple optimizations).
+
+34.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+<suppressed ~270 debug messages>
+Removed a total of 90 cells.
+
+34.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$743.
+    dead port 1/2 on $mux $procmux$751.
+    dead port 2/2 on $mux $procmux$753.
+    dead port 2/2 on $mux $procmux$760.
+    dead port 2/2 on $mux $procmux$768.
+    dead port 2/2 on $mux $procmux$778.
+    dead port 2/2 on $mux $procmux$790.
+    dead port 2/2 on $mux $procmux$804.
+    dead port 2/2 on $mux $procmux$819.
+Removed 9 multiplexer ports.
+<suppressed ~26 debug messages>
+
+34.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+    New ctrl vector for $pmux cell $procmux$623: { $auto$opt_reduce.cc:134:opt_pmux$869 $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:135$180_Y }
+    New ctrl vector for $pmux cell $procmux$671: { $auto$opt_reduce.cc:134:opt_pmux$873 $auto$opt_reduce.cc:134:opt_pmux$871 }
+    New ctrl vector for $pmux cell $procmux$542: $auto$opt_reduce.cc:134:opt_pmux$875
+    New ctrl vector for $pmux cell $procmux$545: { $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$160_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:135$180_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:136$182_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:136$183_Y $auto$opt_reduce.cc:134:opt_pmux$877 }
+    New ctrl vector for $pmux cell $procmux$834: $auto$opt_reduce.cc:134:opt_pmux$879
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 5 changes.
+
+34.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 0 unused cells and 99 unused wires.
+<suppressed ~1 debug messages>
+
+34.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~1 debug messages>
+
+34.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+34.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~26 debug messages>
+
+34.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.7.16. Finished OPT passes. (There is nothing left to do.)
+
+34.8. Executing FSM pass (extract and optimize FSM).
+
+34.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking hwpe_stream_ctrl.state_q as FSM state register:
+    Circuit seems to be self-resetting.
+
+34.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+34.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+34.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+34.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+34.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+34.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+34.9. Executing OPT pass (performing simple optimizations).
+
+34.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~26 debug messages>
+
+34.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$867 ($adff) from module hwpe_stream_ctrl (D = $0\cycle_count_o[31:0], Q = \cycle_count_o).
+Adding EN signal on $procdff$866 ($adff) from module hwpe_stream_ctrl (D = \state_d, Q = \state_q).
+Adding EN signal on $procdff$865 ($adff) from module hwpe_stream_ctrl (D = $0\stream_valid_pipe[0:0], Q = \stream_valid_pipe).
+Adding EN signal on $procdff$864 ($adff) from module hwpe_stream_ctrl (D = $0\scan_valid_pipe[0:0], Q = \scan_valid_pipe).
+Adding EN signal on $procdff$863 ($adff) from module hwpe_stream_ctrl (D = $0\scan_idx_pipe[9:0], Q = \scan_idx_pipe).
+Adding EN signal on $procdff$862 ($adff) from module hwpe_stream_ctrl (D = $0\scan_k_q[9:0], Q = \scan_k_q).
+Adding EN signal on $procdff$861 ($adff) from module hwpe_stream_ctrl (D = $0\first_nz_idx_q[9:0], Q = \first_nz_idx_q).
+Adding EN signal on $procdff$860 ($adff) from module hwpe_stream_ctrl (D = $0\sparse_ptr_q[9:0], Q = \sparse_ptr_q).
+Adding EN signal on $procdff$859 ($adff) from module hwpe_stream_ctrl (D = $0\nz_len_q[9:0], Q = \nz_len_q).
+Adding EN signal on $procdff$858 ($adff) from module hwpe_stream_ctrl (D = $0\l2_drain_step_q[1:0], Q = \l2_drain_step_q).
+Adding EN signal on $procdff$857 ($adff) from module hwpe_stream_ctrl (D = $0\l2_k_q[5:0], Q = \l2_k_q).
+Adding EN signal on $procdff$856 ($adff) from module hwpe_stream_ctrl (D = $0\l2_grp_q[1:0], Q = \l2_grp_q).
+Adding EN signal on $procdff$855 ($adff) from module hwpe_stream_ctrl (D = $0\l1_grp_q[3:0], Q = \l1_grp_q).
+Adding EN signal on $procdff$854 ($adff) from module hwpe_stream_ctrl (D = $0\pe_sel_l2_o[0:0], Q = \pe_sel_l2_o).
+Adding EN signal on $procdff$851 ($adff) from module hwpe_stream_ctrl (D = \l2_grp_q, Q = \l2_bias_grp_o).
+Adding EN signal on $procdff$850 ($adff) from module hwpe_stream_ctrl (D = \l1_grp_q, Q = \l1_bias_grp_o).
+Adding EN signal on $procdff$849 ($adff) from module hwpe_stream_ctrl (D = $0\l2_in_addr_o[5:0], Q = \l2_in_addr_o).
+Adding EN signal on $procdff$848 ($adff) from module hwpe_stream_ctrl (D = { \l1_grp_q 2'00 }, Q = \l1_wb_addr_o).
+Adding EN signal on $procdff$846 ($adff) from module hwpe_stream_ctrl (D = $0\l1_in_addr_o[9:0], Q = \l1_in_addr_o).
+Adding EN signal on $procdff$845 ($adff) from module hwpe_stream_ctrl (D = $0\w_addr_o[13:0], Q = \w_addr_o).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$967 ($adffe) from module hwpe_stream_ctrl.
+Setting constant 0-bit at position 1 on $auto$ff.cc:266:slice$967 ($adffe) from module hwpe_stream_ctrl.
+
+34.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 3 unused cells and 3 unused wires.
+<suppressed ~4 debug messages>
+
+34.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~15 debug messages>
+
+34.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+34.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~23 debug messages>
+
+34.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+<suppressed ~48 debug messages>
+Removed a total of 16 cells.
+
+34.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 0 unused cells and 15 unused wires.
+<suppressed ~1 debug messages>
+
+34.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+34.9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+34.9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.9.23. Finished OPT passes. (There is nothing left to do.)
+
+34.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$auto$opt_dff.cc:195:make_patterns_logic$918 ($ne).
+Removed top 1 bits (of 4) from port B of cell hwpe_stream_ctrl.$procmux$553_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$auto$opt_dff.cc:195:make_patterns_logic$909 ($ne).
+Removed top 1 bits (of 4) from port B of cell hwpe_stream_ctrl.$procmux$538_CMP0 ($eq).
+Removed top 1 bits (of 4) from mux cell hwpe_stream_ctrl.$procmux$776 ($mux).
+Removed top 2 bits (of 4) from port B of cell hwpe_stream_ctrl.$eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$160 ($eq).
+Removed top 8 bits (of 10) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$161 ($add).
+Removed top 4 bits (of 10) from port B of cell hwpe_stream_ctrl.$mul$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:106$165 ($mul).
+Removed top 4 bits (of 14) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:107$166 ($add).
+Removed top 3 bits (of 4) from port B of cell hwpe_stream_ctrl.$eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:113$167 ($eq).
+Removed top 2 bits (of 4) from port B of cell hwpe_stream_ctrl.$eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:135$180 ($eq).
+Removed top 1 bits (of 4) from port B of cell hwpe_stream_ctrl.$eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:136$182 ($eq).
+Removed top 1 bits (of 4) from port B of cell hwpe_stream_ctrl.$eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:136$183 ($eq).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:139$186 ($eq).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$auto$opt_dff.cc:195:make_patterns_logic$889 ($ne).
+Removed top 31 bits (of 32) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:151$197 ($add).
+Removed top 9 bits (of 10) from port B of cell hwpe_stream_ctrl.$sub$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:189$204 ($sub).
+Removed top 9 bits (of 10) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:291$217 ($add).
+Removed top 9 bits (of 10) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:299$220 ($add).
+Removed top 9 bits (of 10) from port B of cell hwpe_stream_ctrl.$gt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:308$221 ($gt).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$auto$opt_dff.cc:195:make_patterns_logic$891 ($ne).
+Removed top 9 bits (of 10) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:325$226 ($add).
+Removed top 3 bits (of 4) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:338$227 ($add).
+Removed top 6 bits (of 14) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:346$228 ($add).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$auto$opt_dff.cc:195:make_patterns_logic$893 ($ne).
+Removed top 5 bits (of 6) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:357$230 ($add).
+Removed top 8 bits (of 14) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:359$234 ($add).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:366$236 ($add).
+Removed top 1 bits (of 2) from port B of cell hwpe_stream_ctrl.$add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:369$237 ($add).
+Removed top 1 bits (of 4) from wire hwpe_stream_ctrl.$5\state_d[3:0].
+
+34.11. Executing PEEPOPT pass (run peephole optimizers).
+
+34.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+34.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module hwpe_stream_ctrl:
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$161 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:107$166 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:151$197 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:291$217 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:299$220 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:325$226 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:338$227 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:346$228 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:357$230 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:359$234 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:366$236 ($add).
+  creating $macc model for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:369$237 ($add).
+  creating $macc model for $mul$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:106$165 ($mul).
+  creating $macc model for $sub$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:189$204 ($sub).
+  creating $alu model for $macc $sub$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:189$204.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:369$237.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:366$236.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:359$234.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:357$230.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:346$228.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:338$227.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:325$226.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:299$220.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:291$217.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:151$197.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:107$166.
+  creating $alu model for $macc $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$161.
+  creating $macc cell for $mul$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:106$165: $auto$alumacc.cc:365:replace_macc$988
+  creating $alu model for $gt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:308$221 ($gt): new $alu
+  creating $alu model for $lt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:296$218 ($lt): new $alu
+  creating $alu model for $lt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:365$235 ($lt): new $alu
+  creating $alu model for $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:140$189 ($eq): merged with $lt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:365$235.
+  creating $alu model for $ne$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:217$209 ($ne): merged with $lt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:365$235.
+  creating $alu cell for $lt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:365$235, $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:140$189, $ne$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:217$209: $auto$alumacc.cc:485:replace_alu$992
+  creating $alu cell for $lt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:296$218: $auto$alumacc.cc:485:replace_alu$1005
+  creating $alu cell for $gt$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:308$221: $auto$alumacc.cc:485:replace_alu$1010
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$161: $auto$alumacc.cc:485:replace_alu$1015
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:107$166: $auto$alumacc.cc:485:replace_alu$1018
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:151$197: $auto$alumacc.cc:485:replace_alu$1021
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:291$217: $auto$alumacc.cc:485:replace_alu$1024
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:299$220: $auto$alumacc.cc:485:replace_alu$1027
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:325$226: $auto$alumacc.cc:485:replace_alu$1030
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:338$227: $auto$alumacc.cc:485:replace_alu$1033
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:346$228: $auto$alumacc.cc:485:replace_alu$1036
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:357$230: $auto$alumacc.cc:485:replace_alu$1039
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:359$234: $auto$alumacc.cc:485:replace_alu$1042
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:366$236: $auto$alumacc.cc:485:replace_alu$1045
+  creating $alu cell for $add$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:369$237: $auto$alumacc.cc:485:replace_alu$1048
+  creating $alu cell for $sub$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:189$204: $auto$alumacc.cc:485:replace_alu$1051
+  created 16 $alu and 1 $macc cells.
+
+34.14. Executing SHARE pass (SAT-based resource sharing).
+
+34.15. Executing OPT pass (performing simple optimizations).
+
+34.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~8 debug messages>
+
+34.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+34.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 2 unused cells and 7 unused wires.
+<suppressed ~3 debug messages>
+
+34.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+34.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+34.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.15.16. Finished OPT passes. (There is nothing left to do.)
+
+34.16. Executing MEMORY pass.
+
+34.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+34.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+34.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+34.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+34.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+34.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+34.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+34.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+34.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.18. Executing OPT pass (performing simple optimizations).
+
+34.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~74 debug messages>
+
+34.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 4 unused cells and 37 unused wires.
+<suppressed ~5 debug messages>
+
+34.18.5. Finished fast OPT passes.
+
+34.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+34.20. Executing OPT pass (performing simple optimizations).
+
+34.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+34.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+    Consolidated identical input bits for $mux cell $procmux$748:
+      Old ports: A=4'0110, B=4'1001, Y=$8\state_d[3:0]
+      New ports: A=2'10, B=2'01, Y=$8\state_d[3:0] [1:0]
+      New connections: $8\state_d[3:0] [3:2] = { $8\state_d[3:0] [0] $8\state_d[3:0] [1] }
+    Consolidated identical input bits for $mux cell $procmux$776:
+      Old ports: A=3'010, B=3'110, Y=$5\state_d[3:0]
+      New ports: A=1'0, B=1'1, Y=$5\state_d[3:0] [2]
+      New connections: $5\state_d[3:0] [1:0] = 2'10
+    New ctrl vector for $pmux cell $procmux$822: { $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:142$191_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:113$167_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:104$160_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:135$180_Y $procmux$553_CMP $0\l1_wb_we_o[0:0] $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:136$182_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:136$183_Y $eq$/workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv:139$185_Y }
+  Optimizing cells in module \hwpe_stream_ctrl.
+    Consolidated identical input bits for $mux cell $procmux$758:
+      Old ports: A=4'1000, B=$8\state_d[3:0], Y=$7\state_d[3:0]
+      New ports: A=3'100, B={ $8\state_d[3:0] [0] $8\state_d[3:0] [1:0] }, Y={ $7\state_d[3:0] [3] $7\state_d[3:0] [1:0] }
+      New connections: $7\state_d[3:0] [2] = $7\state_d[3:0] [1]
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 4 changes.
+
+34.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.20.6. Executing OPT_SHARE pass.
+
+34.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~1 debug messages>
+
+34.20.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+34.20.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+34.20.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.20.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.20.14. Executing OPT_SHARE pass.
+
+34.20.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.20.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+34.20.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.20.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+34.20.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \hwpe_stream_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+34.20.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \hwpe_stream_ctrl.
+Performed a total of 0 changes.
+
+34.20.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+Removed a total of 0 cells.
+
+34.20.22. Executing OPT_SHARE pass.
+
+34.20.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.20.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+
+34.20.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+
+34.20.26. Finished OPT passes. (There is nothing left to do.)
+
+34.21. Executing TECHMAP pass (map to technology primitives).
+
+34.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+34.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$7e708ae28ab761f11d0fb59d3ffc72f6a4baf5d9\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$b3b6ac92d800c6f07aa48f510f923d86a674e5a7\_90_pmux for cells of type $pmux.
+Using template $paramod$effaf36432c334223db2ff0ecd7fefb10188d957\_90_pmux for cells of type $pmux.
+Using template $paramod$9c32b45917accb56be6667e7eba7742d064d7fbb\_90_alu for cells of type $alu.
+Using template $paramod$32efbfac1c4dc57230cf86180788fdfd12e3b511\_90_alu for cells of type $alu.
+Using template $paramod$13af41b20a9ff4e701d080c0d60e0efb0173cb4d\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$4d45682f6d5f8751d24fc75184ef72226da353f7\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using template $paramod$6a42b6fefed750f8a1c58eab59479d960557103c\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$754650b284649a026620fc6856e5b6886cbfe794\_90_alu for cells of type $alu.
+Using template $paramod$00298f3f8094950cb9a5ff2fda48d0d8bde8806c\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc.
+  add 6'110001 * \l1_grp_q (6x4 bits, unsigned)
+Using template $paramod$53700bbee849b2010ad0b60a61ccd204a10e24ca\_90_alu for cells of type $alu.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using template $paramod$175e67c02b86e96b1288b9dc100122520d7240d8\_90_alu for cells of type $alu.
+Using template $paramod$1eb759649286d7485bd82f4dfc30385bade4b4b3\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001010 for cells of type $fa.
+Using template $paramod$484d51534650924b7ed4c69e46eed3a56904771f\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1841 debug messages>
+
+34.22. Executing OPT pass (performing simple optimizations).
+
+34.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~1109 debug messages>
+
+34.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+<suppressed ~378 debug messages>
+Removed a total of 126 cells.
+
+34.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 106 unused cells and 983 unused wires.
+<suppressed ~107 debug messages>
+
+34.22.5. Finished fast OPT passes.
+
+34.23. Executing ABC pass (technology mapping using ABC).
+
+34.23.1. Extracting gate netlist of module `\hwpe_stream_ctrl' to `<abc-temp-dir>/input.blif'..
+Extracted 774 gates and 896 wires to a netlist network with 120 inputs and 164 outputs.
+
+34.23.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+34.23.1.2. Re-integrating ABC results.
+ABC RESULTS:              NAND cells:       59
+ABC RESULTS:               NOT cells:       56
+ABC RESULTS:              XNOR cells:       25
+ABC RESULTS:               NOR cells:       46
+ABC RESULTS:             ORNOT cells:       15
+ABC RESULTS:               AND cells:       34
+ABC RESULTS:               XOR cells:       91
+ABC RESULTS:                OR cells:       94
+ABC RESULTS:               MUX cells:       32
+ABC RESULTS:            ANDNOT cells:      261
+ABC RESULTS:        internal signals:      612
+ABC RESULTS:           input signals:      120
+ABC RESULTS:          output signals:      164
+Removing temp directory.
+
+34.24. Executing OPT pass (performing simple optimizations).
+
+34.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module hwpe_stream_ctrl.
+<suppressed ~12 debug messages>
+
+34.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\hwpe_stream_ctrl'.
+<suppressed ~24 debug messages>
+Removed a total of 8 cells.
+
+34.24.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+34.24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 2 unused cells and 554 unused wires.
+<suppressed ~5 debug messages>
+
+34.24.5. Finished fast OPT passes.
+
+34.25. Executing HIERARCHY pass (managing design hierarchy).
+
+34.25.1. Analyzing design hierarchy..
+Top module:  \hwpe_stream_ctrl
+
+34.25.2. Analyzing design hierarchy..
+Top module:  \hwpe_stream_ctrl
+Removed 0 unused modules.
+
+34.26. Printing statistics.
+
+=== hwpe_stream_ctrl ===
+
+   Number of wires:                615
+   Number of wire bits:            956
+   Number of public wires:          40
+   Number of public wire bits:     238
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                844
+     $_ANDNOT_                     260
+     $_AND_                         33
+     $_DFFE_PN0P_                  137
+     $_DFF_PN0_                      3
+     $_MUX_                         32
+     $_NAND_                        59
+     $_NOR_                         42
+     $_NOT_                         54
+     $_ORNOT_                       14
+     $_OR_                          93
+     $_XNOR_                        25
+     $_XOR_                         91
+     sky130_sram_1kbyte_1rw1r_10x1024_macro      1
+
+34.27. Executing CHECK pass (checking for obvious problems).
+Checking module hwpe_stream_ctrl...
+Found and reported 0 problems.
+
+35. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+  cell sky130_fd_sc_hd__dfxtp_1 (noninv, pins=3, area=20.02) is a direct match for cell type $_DFF_P_.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+  cell sky130_fd_sc_hd__dfrtn_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_NN0_.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+  cell sky130_fd_sc_hd__dfrtp_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_PN0_.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+  cell sky130_fd_sc_hd__dfbbn_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_NNN_.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbn_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtn_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+  cell sky130_fd_sc_hd__dfbbp_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_PNN_.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE|IQ&!DE' in pin attribute of cell 'sky130_fd_sc_hd__edfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfbbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfrtp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfsbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfstp_4' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sdfxtp_4' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxbp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_1' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_2' - skipping.
+Warning: Found unsupported expression 'D&DE&!SCE|IQ&!DE&!SCE|SCD&SCE' in pin attribute of cell 'sky130_fd_sc_hd__sedfxtp_4' - skipping.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    \sky130_fd_sc_hd__dfrtn_1 _DFF_NN0_ (.CLK_N( C), .D( D), .Q( Q), .RESET_B( R));
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_1 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    \sky130_fd_sc_hd__dfbbn_1 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \sky130_fd_sc_hd__dfbbp_1 _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+35.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\hwpe_stream_ctrl':
+  mapped 140 $_DFF_PN0_ cells to \sky130_fd_sc_hd__dfrtp_1 cells.
+
+36. Executing ABC pass (technology mapping using ABC).
+
+36.1. Extracting gate netlist of module `\hwpe_stream_ctrl' to `<abc-temp-dir>/input.blif'..
+Extracted 840 gates and 996 wires to a netlist network with 156 inputs and 157 outputs.
+
+36.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.06 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__decap_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__diode_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__dlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__edfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_0".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__einvp_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_bleeder_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_12" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_3" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_6" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__lpflow_decapkapwr_8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__lpflow_inputisolatch_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sdfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "sky130_fd_sc_hd__sdlclkp_4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__sedfxtp_4".
+ABC: Library "sky130_fd_sc_hd__tt_025C_1v80" from "/tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib" has 334 cells (94 skipped: 63 seq; 13 tri-state; 18 no func; 0 dont_use).  Time =     0.09 sec
+ABC: Memory =   19.85 MB. Time =     0.09 sec
+ABC: Warning: Detected 9 multi-output gates (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + ifraig 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf -D 4000 
+ABC: + &put 
+ABC: + buffer 
+ABC: + upsize -D 4000 
+ABC: Current delay (3373.85 ps) does not exceed the target delay (4000.00 ps). Upsizing is not performed.
+ABC: + dnsize -D 4000 
+ABC: + stime -p 
+ABC: WireLoad = "none"  Gates =    625 (  7.5 %)   Cap =  4.8 ff (  4.2 %)   Area =     3384.50 ( 86.2 %)   Delay =  3037.30 ps  (  2.9 %)               
+ABC: Path  0 --       1 : 0   14 pi                                    A =   0.00  Df =   0.0   -0.0 ps  S =   0.0 ps  Cin =  0.0 ff  Cout =  33.3 ff  Cmax =   0.0 ff  G =    0  
+ABC: Path  1 --     352 : 4    1 sky130_fd_sc_hd__nor4b_1              A =   8.76  Df = 251.2 -136.2 ps  S = 217.6 ps  Cin =  2.1 ff  Cout =   2.2 ff  Cmax =  33.9 ff  G =   97  
+ABC: Path  2 --     353 : 1    8 sky130_fd_sc_hd__lpflow_clkbufkapwr_1 A =   3.75  Df = 611.5 -291.3 ps  S = 397.7 ps  Cin =  2.1 ff  Cout =  33.7 ff  Cmax = 130.9 ff  G = 1544  
+ABC: Path  3 --     466 : 3    3 sky130_fd_sc_hd__mux2i_1              A =  10.01  Df = 863.1 -239.2 ps  S = 253.4 ps  Cin =  3.0 ff  Cout =   9.6 ff  Cmax =  68.7 ff  G =  304  
+ABC: Path  4 --     524 : 2    2 sky130_fd_sc_hd__nor2_1               A =   3.75  Df =1038.2 -312.6 ps  S = 163.6 ps  Cin =  2.4 ff  Cout =   7.8 ff  Cmax =  86.1 ff  G =  319  
+ABC: Path  5 --     533 : 3    2 sky130_fd_sc_hd__maj3_1               A =  10.01  Df =1267.0 -152.9 ps  S =  96.3 ps  Cin =  2.8 ff  Cout =   7.8 ff  Cmax = 155.7 ff  G =  272  
+ABC: Path  6 --     540 : 3    2 sky130_fd_sc_hd__maj3_1               A =  10.01  Df =1501.6  -33.3 ps  S =  89.9 ps  Cin =  2.8 ff  Cout =   7.1 ff  Cmax = 155.7 ff  G =  246  
+ABC: Path  7 --     550 : 3    2 sky130_fd_sc_hd__a21oi_1              A =   5.00  Df =1707.6 -145.9 ps  S = 203.7 ps  Cin =  2.3 ff  Cout =   7.8 ff  Cmax =  74.2 ff  G =  324  
+ABC: Path  8 --     556 : 3    2 sky130_fd_sc_hd__maj3_1               A =  10.01  Df =1949.0   -0.6 ps  S =  98.8 ps  Cin =  2.8 ff  Cout =   7.8 ff  Cmax = 155.7 ff  G =  272  
+ABC: Path  9 --     561 : 3    3 sky130_fd_sc_hd__maj3_1               A =  10.01  Df =2347.6 -182.3 ps  S = 109.5 ps  Cin =  2.8 ff  Cout =   9.0 ff  Cmax = 155.7 ff  G =  313  
+ABC: Path 10 --     576 : 3    4 sky130_fd_sc_hd__nor3_1               A =   5.00  Df =2669.5 -415.0 ps  S = 320.6 ps  Cin =  2.4 ff  Cout =   9.2 ff  Cmax =  52.2 ff  G =  368  
+ABC: Path 11 --     583 : 3    1 sky130_fd_sc_hd__a21oi_1              A =   5.00  Df =2924.5 -150.8 ps  S = 103.8 ps  Cin =  2.3 ff  Cout =   2.6 ff  Cmax =  74.2 ff  G =  106  
+ABC: Path 12 --     585 : 4    1 sky130_fd_sc_hd__a2bb2oi_1            A =   8.76  Df =3037.3 -142.8 ps  S =  58.4 ps  Cin =  2.4 ff  Cout =   0.0 ff  Cmax =  69.6 ff  G =    0  
+ABC: Start-point = pi0 (\state_q [0]).  End-point = po53 ($auto$rtlil.cc:2609:MuxGate$4884).
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+36.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_0 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor4b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or3_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or4_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_1 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__a311o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o32a_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o22a_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__maj3_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a221o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or4b_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o221ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o21a_1 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__mux2_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nor2b_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__mux2i_1 cells:       11
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_1 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2ai_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_isobufsrc_1 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__a31o_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_1 cells:       24
+ABC RESULTS:   sky130_fd_sc_hd__or2_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__clkbuf_1 cells:       18
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_clkbufkapwr_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__and4_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__xor2_1 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__nand4_1 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__nor2_1 cells:       98
+ABC RESULTS:   sky130_fd_sc_hd__o32ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__inv_1 cells:       24
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__lpflow_inputiso0n_1 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__nand2_1 cells:      100
+ABC RESULTS:   sky130_fd_sc_hd__and3_1 cells:       17
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_1 cells:       70
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:       39
+ABC RESULTS:   sky130_fd_sc_hd__a21o_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a41oi_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a22o_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__nand3_1 cells:       15
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_0 cells:       39
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_1 cells:        7
+ABC RESULTS:        internal signals:      683
+ABC RESULTS:           input signals:      156
+ABC RESULTS:          output signals:      157
+Removing temp directory.
+
+37. Executing HILOMAP pass (mapping to constant drivers).
+
+38. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \hwpe_stream_ctrl..
+Removed 23 unused cells and 914 unused wires.
+<suppressed ~28 debug messages>
+
+39. Printing statistics.
+
+=== hwpe_stream_ctrl ===
+
+   Number of wires:                645
+   Number of wire bits:            856
+   Number of public wires:          36
+   Number of public wire bits:     212
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                769
+     sky130_fd_sc_hd__a21boi_0       1
+     sky130_fd_sc_hd__a21o_1         4
+     sky130_fd_sc_hd__a21oi_1       70
+     sky130_fd_sc_hd__a221o_1        1
+     sky130_fd_sc_hd__a22o_1         3
+     sky130_fd_sc_hd__a22oi_1        4
+     sky130_fd_sc_hd__a2bb2oi_1      1
+     sky130_fd_sc_hd__a311o_1        1
+     sky130_fd_sc_hd__a31o_2         2
+     sky130_fd_sc_hd__a31oi_1       12
+     sky130_fd_sc_hd__a41oi_1        2
+     sky130_fd_sc_hd__and3_1        17
+     sky130_fd_sc_hd__and4_1         3
+     sky130_fd_sc_hd__clkbuf_1      18
+     sky130_fd_sc_hd__conb_1         3
+     sky130_fd_sc_hd__dfrtp_1      140
+     sky130_fd_sc_hd__inv_1         24
+     sky130_fd_sc_hd__lpflow_clkbufkapwr_1      5
+     sky130_fd_sc_hd__lpflow_inputiso0n_1     10
+     sky130_fd_sc_hd__lpflow_isobufsrc_1      6
+     sky130_fd_sc_hd__maj3_1         4
+     sky130_fd_sc_hd__mux2_2         4
+     sky130_fd_sc_hd__mux2i_1       11
+     sky130_fd_sc_hd__nand2_1      100
+     sky130_fd_sc_hd__nand2b_1       9
+     sky130_fd_sc_hd__nand3_1       15
+     sky130_fd_sc_hd__nand3b_1       1
+     sky130_fd_sc_hd__nand4_1        9
+     sky130_fd_sc_hd__nor2_1        98
+     sky130_fd_sc_hd__nor2b_1        3
+     sky130_fd_sc_hd__nor3_1        39
+     sky130_fd_sc_hd__nor4_1        12
+     sky130_fd_sc_hd__nor4b_1        1
+     sky130_fd_sc_hd__o2111ai_1      1
+     sky130_fd_sc_hd__o211ai_1      10
+     sky130_fd_sc_hd__o21a_1        12
+     sky130_fd_sc_hd__o21ai_0       39
+     sky130_fd_sc_hd__o21bai_1       1
+     sky130_fd_sc_hd__o221ai_1       1
+     sky130_fd_sc_hd__o22a_1         2
+     sky130_fd_sc_hd__o22ai_1        5
+     sky130_fd_sc_hd__o2bb2ai_1      4
+     sky130_fd_sc_hd__o31ai_1        7
+     sky130_fd_sc_hd__o32a_1         1
+     sky130_fd_sc_hd__o32ai_1        1
+     sky130_fd_sc_hd__or2_2          9
+     sky130_fd_sc_hd__or3_1          1
+     sky130_fd_sc_hd__or4_1          2
+     sky130_fd_sc_hd__or4b_2         1
+     sky130_fd_sc_hd__xnor2_1       24
+     sky130_fd_sc_hd__xor2_1        14
+     sky130_sram_1kbyte_1rw1r_10x1024_macro      1
+
+   Area for cell type \sky130_sram_1kbyte_1rw1r_10x1024_macro is unknown!
+
+   Chip area for module '\hwpe_stream_ctrl': 6899.116800
+
+Warnings: 26 unique messages, 234 total
+End of script. Logfile hash: 08539235ce, CPU: user 0.90s system 0.03s, MEM: 40.91 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 28% 2x abc (0 sec), 10% 31x opt_expr (0 sec), ...

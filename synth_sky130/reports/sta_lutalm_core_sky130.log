@@ -1,0 +1,84 @@
+OpenSTA 3.1.0 d1e43c6f9f Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+==========================================================
+  STA REPORT: lutalm_core_mul_s8 @ SKY130 (100 MHz, 1.8V)
+==========================================================
+Warning 168: sta_sky130.tcl line 1, unknown field nets.
+Startpoint: log_b_i[1] (input port clocked by clk)
+Endpoint: p_o[14] (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout      Cap     Slew    Delay     Time   Description
+---------------------------------------------------------------------------------
+                   0.000    0.000    0.000   clock clk (rise edge)
+                            0.000    0.000   clock network delay (ideal)
+                            0.000    0.000 v input external delay
+     2    0.005    0.000    0.000    0.000 v log_b_i[1] (in)
+                   0.000    0.000    0.000 v gen_carry_adder.u_log_add/_20_/A (sky130_fd_sc_hd__nor2_1)
+     2    0.004    0.103    0.097    0.097 ^ gen_carry_adder.u_log_add/_20_/Y (sky130_fd_sc_hd__nor2_1)
+                   0.103    0.000    0.097 ^ gen_carry_adder.u_log_add/_23_/A2 (sky130_fd_sc_hd__o21ai_0)
+     2    0.007    0.115    0.124    0.221 v gen_carry_adder.u_log_add/_23_/Y (sky130_fd_sc_hd__o21ai_0)
+                   0.115    0.000    0.221 v gen_carry_adder.u_log_add/_26_/C (sky130_fd_sc_hd__maj3_1)
+     2    0.007    0.091    0.399    0.620 v gen_carry_adder.u_log_add/_26_/X (sky130_fd_sc_hd__maj3_1)
+                   0.091    0.000    0.620 v gen_carry_adder.u_log_add/_29_/C (sky130_fd_sc_hd__maj3_1)
+     2    0.007    0.091    0.392    1.012 v gen_carry_adder.u_log_add/_29_/X (sky130_fd_sc_hd__maj3_1)
+                   0.091    0.000    1.012 v gen_carry_adder.u_log_add/_32_/C (sky130_fd_sc_hd__maj3_1)
+     2    0.007    0.091    0.392    1.404 v gen_carry_adder.u_log_add/_32_/X (sky130_fd_sc_hd__maj3_1)
+                   0.091    0.000    1.404 v gen_carry_adder.u_log_add/_35_/C (sky130_fd_sc_hd__maj3_1)
+     2    0.007    0.091    0.392    1.796 v gen_carry_adder.u_log_add/_35_/X (sky130_fd_sc_hd__maj3_1)
+                   0.091    0.000    1.796 v gen_carry_adder.u_log_add/_38_/C (sky130_fd_sc_hd__maj3_1)
+     2    0.007    0.091    0.392    2.188 v gen_carry_adder.u_log_add/_38_/X (sky130_fd_sc_hd__maj3_1)
+                   0.091    0.000    2.188 v gen_carry_adder.u_log_add/_41_/C (sky130_fd_sc_hd__maj3_1)
+     2    0.007    0.091    0.392    2.580 v gen_carry_adder.u_log_add/_41_/X (sky130_fd_sc_hd__maj3_1)
+                   0.091    0.000    2.580 v gen_carry_adder.u_log_add/_43_/A (sky130_fd_sc_hd__xnor2_1)
+    16    0.031    0.695    0.588    3.168 ^ gen_carry_adder.u_log_add/_43_/Y (sky130_fd_sc_hd__xnor2_1)
+                   0.695    0.000    3.168 ^ u_antilog/_051_/C_N (sky130_fd_sc_hd__nor4bb_1)
+     6    0.015    0.651    0.673    3.841 ^ u_antilog/_051_/Y (sky130_fd_sc_hd__nor4bb_1)
+                   0.651    0.000    3.841 ^ u_antilog/_074_/A2 (sky130_fd_sc_hd__a222oi_1)
+     1    0.002    0.162    0.222    4.063 v u_antilog/_074_/Y (sky130_fd_sc_hd__a222oi_1)
+                   0.162    0.000    4.063 v u_antilog/_076_/B (sky130_fd_sc_hd__nand3_1)
+     2    0.004    0.081    0.133    4.197 ^ u_antilog/_076_/Y (sky130_fd_sc_hd__nand3_1)
+                   0.081    0.000    4.197 ^ _47_/A (sky130_fd_sc_hd__nand3_1)
+     3    0.007    0.177    0.098    4.294 v _47_/Y (sky130_fd_sc_hd__nand3_1)
+                   0.177    0.000    4.294 v _56_/A1 (sky130_fd_sc_hd__a222oi_1)
+     5    0.013    0.571    0.582    4.877 ^ _56_/Y (sky130_fd_sc_hd__a222oi_1)
+                   0.571    0.000    4.877 ^ _69_/A (sky130_fd_sc_hd__nand4_1)
+     4    0.011    0.238    0.267    5.144 v _69_/Y (sky130_fd_sc_hd__nand4_1)
+                   0.238    0.000    5.144 v _81_/A (sky130_fd_sc_hd__nor4_1)
+     4    0.012    0.544    0.568    5.712 ^ _81_/Y (sky130_fd_sc_hd__nor4_1)
+                   0.544    0.000    5.712 ^ _92_/A (sky130_fd_sc_hd__nand4_1)
+     2    0.006    0.178    0.193    5.905 v _92_/Y (sky130_fd_sc_hd__nand4_1)
+                   0.178    0.000    5.905 v _94_/A (sky130_fd_sc_hd__lpflow_isobufsrc_1)
+     1    0.000    0.029    0.166    6.071 v _94_/X (sky130_fd_sc_hd__lpflow_isobufsrc_1)
+                   0.029    0.000    6.071 v p_o[14] (out)
+                                     6.071   data arrival time
+
+                   0.000   10.000   10.000   clock clk (rise edge)
+                            0.000   10.000   clock network delay (ideal)
+                            0.000   10.000   clock reconvergence pessimism
+                            0.000   10.000   output external delay
+                                    10.000   data required time
+---------------------------------------------------------------------------------
+                                    10.000   data required time
+                                    -6.071   data arrival time
+---------------------------------------------------------------------------------
+                                     3.929   slack (MET)
+
+
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential            0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+Combinational         3.844e-05  4.098e-05  3.513e-10  7.943e-05 100.0%
+Clock                 0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+Macro                 0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+Pad                   0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+----------------------------------------------------------------
+Total                 3.844e-05  4.098e-05  3.513e-10  7.943e-05 100.0%
+                          48.4%      51.6%       0.0%
+% 

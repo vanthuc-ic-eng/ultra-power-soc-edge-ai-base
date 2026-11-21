@@ -1,0 +1,69 @@
+# Simulation & Temporary Build Artifacts
+sim/*.vvp
+sim/*.vcd
+sim/*.log
+build/*
+!build/bitstream_pynq_z2/
+!build/bitstream_pynq_z2/*.bit
+clockInfo.txt
+*.jou
+*.backup.*
+.Xil/
+gui_server.log
+
+# Vivado Synthesis Temporary Files
+synth/*.log
+synth/*.jou
+synth/*.dcp
+synth/*.pb
+synth/clockInfo.txt
+synth/*.backup.*
+synth/.Xil/
+
+# Keep Sign-off Logs in reports/ and synth_sky130/reports/
+!reports/**/*.log
+!synth_sky130/reports/*.log
+
+# Python Cache & Bytecode
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# OS & Editor Artifacts
+.DS_Store
+*.swp
+*.bak
+*~
+
+# Figures & Loose Images (Only preserve interactive web assets)
+*.png
+*.jpg
+*.jpeg
+*.svg
+!web/conqueror_web/assets/*.png
+!web/conqueror_web/assets/*.jpg
+!web/conqueror_web/assets/*.jpeg
+!web/conqueror_web/assets/*.svg
+synth_sky130/figures/
+poster_a2/figures/
+
+# LaTeX Build Artifacts & PDFs
+*.aux
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+# Poster drafts & presentations
+poster_a2/
+
+# Backup and Temp Files
+*.backup.*
+*.backup.log
+reports/**/*.backup.*
+reports/**/*.backup.log
+

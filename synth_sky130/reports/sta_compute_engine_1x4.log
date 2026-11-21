@@ -1,0 +1,159 @@
+OpenSTA 3.1.0 d1e43c6f9f Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Warning 441: sta_compute_engine_1x4.tcl line 1, set_input_delay relative to a clock defined on the same port/pin not allowed.
+=================================================================
+  STA REPORT: compute_engine_1x4 @ SKY130 (100 MHz, 1.8V, 25C)
+=================================================================
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: gen_pe[0].u_pe/_402_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.500    0.500 ^ input external delay
+   0.000    0.500 ^ rst_n (in)
+   0.000    0.500 ^ gen_pe[0].u_pe/_402_/RESET_B (sky130_fd_sc_hd__dfrtp_1)
+            0.500   data arrival time
+
+  10.000   10.000   clock clk (rise edge)
+   0.000   10.000   clock network delay (ideal)
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ gen_pe[0].u_pe/_402_/CLK (sky130_fd_sc_hd__dfrtp_1)
+   0.228   10.228   library recovery time
+           10.228   data required time
+-----------------------------------------------------------
+           10.228   data required time
+           -0.500   data arrival time
+-----------------------------------------------------------
+            9.728   slack (MET)
+
+
+Startpoint: valid_i (input port clocked by clk)
+Endpoint: gen_pe[0].u_pe/_482_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.500    0.500 v input external delay
+   0.000    0.500 v valid_i (in)
+   0.229    0.729 v _24_/X (sky130_fd_sc_hd__and2_0)
+   0.591    1.320 v u_shared_act_enc/u_sign/_10_/X (sky130_fd_sc_hd__or4_1)
+   0.430    1.750 v u_shared_act_enc/u_sign/_11_/X (sky130_fd_sc_hd__or4_1)
+   0.540    2.290 ^ u_shared_act_enc/u_sign/_25_/X (sky130_fd_sc_hd__lpflow_isobufsrc_1)
+   0.092    2.383 v u_shared_act_enc/u_encoder/u_normalizer/_51_/Y (sky130_fd_sc_hd__nand2_1)
+   0.133    2.516 ^ u_shared_act_enc/u_encoder/u_normalizer/_52_/Y (sky130_fd_sc_hd__o21ai_0)
+   0.325    2.841 ^ u_shared_act_enc/u_encoder/u_converter/genblk1.genblk1.gen_low3.u_lut/_3_/X (sky130_fd_sc_hd__lpflow_inputiso1p_1)
+   0.249    3.090 v u_shared_act_enc/u_encoder/u_converter/genblk1.genblk1.gen_low3.u_lut/_5_/Y (sky130_fd_sc_hd__nand2_1)
+   0.152    3.241 ^ gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_18_/Y (sky130_fd_sc_hd__nand2_1)
+   0.137    3.378 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_24_/Y (sky130_fd_sc_hd__o21ai_0)
+   0.399    3.777 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_27_/X (sky130_fd_sc_hd__maj3_1)
+   0.392    4.169 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_30_/X (sky130_fd_sc_hd__maj3_1)
+   0.392    4.561 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_33_/X (sky130_fd_sc_hd__maj3_1)
+   0.392    4.953 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_36_/X (sky130_fd_sc_hd__maj3_1)
+   0.392    5.345 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_39_/X (sky130_fd_sc_hd__maj3_1)
+   0.392    5.737 v gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_42_/X (sky130_fd_sc_hd__maj3_1)
+   0.595    6.332 ^ gen_pe[0].u_pe/u_mult_core/gen_carry_adder.u_log_add/_44_/Y (sky130_fd_sc_hd__xnor2_1)
+   0.742    7.074 ^ gen_pe[0].u_pe/u_mult_core/u_antilog/_055_/Y (sky130_fd_sc_hd__nor4bb_1)
+   0.184    7.257 v gen_pe[0].u_pe/u_mult_core/u_antilog/_082_/Y (sky130_fd_sc_hd__a22oi_1)
+   0.120    7.377 ^ gen_pe[0].u_pe/u_mult_core/u_antilog/_086_/Y (sky130_fd_sc_hd__nand3_1)
+   0.082    7.459 v gen_pe[0].u_pe/u_mult_core/_48_/Y (sky130_fd_sc_hd__nand3_1)
+   0.574    8.032 ^ gen_pe[0].u_pe/u_mult_core/_56_/Y (sky130_fd_sc_hd__a222oi_1)
+   0.267    8.299 v gen_pe[0].u_pe/u_mult_core/_69_/Y (sky130_fd_sc_hd__nand4_1)
+   0.568    8.867 ^ gen_pe[0].u_pe/u_mult_core/_81_/Y (sky130_fd_sc_hd__nor4_1)
+   0.193    9.061 v gen_pe[0].u_pe/u_mult_core/_92_/Y (sky130_fd_sc_hd__nand4_1)
+   0.179    9.240 v gen_pe[0].u_pe/u_mult_core/_94_/X (sky130_fd_sc_hd__lpflow_isobufsrc_1)
+   0.000    9.240 v gen_pe[0].u_pe/_482_/D (sky130_fd_sc_hd__dfrtp_1)
+            9.240   data arrival time
+
+  10.000   10.000   clock clk (rise edge)
+   0.000   10.000   clock network delay (ideal)
+   0.000   10.000   clock reconvergence pessimism
+           10.000 ^ gen_pe[0].u_pe/_482_/CLK (sky130_fd_sc_hd__dfrtp_1)
+  -0.121    9.879   library setup time
+            9.879   data required time
+-----------------------------------------------------------
+            9.879   data required time
+           -9.240   data arrival time
+-----------------------------------------------------------
+            0.639   slack (MET)
+
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: gen_pe[0].u_pe/_402_ (removal check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.500    0.500 ^ input external delay
+   0.000    0.500 ^ rst_n (in)
+   0.000    0.500 ^ gen_pe[0].u_pe/_402_/RESET_B (sky130_fd_sc_hd__dfrtp_1)
+            0.500   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.000    0.000   clock reconvergence pessimism
+            0.000 ^ gen_pe[0].u_pe/_402_/CLK (sky130_fd_sc_hd__dfrtp_1)
+   0.296    0.296   library removal time
+            0.296   data required time
+-----------------------------------------------------------
+            0.296   data required time
+           -0.500   data arrival time
+-----------------------------------------------------------
+            0.204   slack (MET)
+
+
+Startpoint: gen_pe[0].u_pe/_436_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: gen_pe[0].u_pe/_402_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.000    0.000 ^ gen_pe[0].u_pe/_436_/CLK (sky130_fd_sc_hd__dfrtp_1)
+   0.295    0.295 ^ gen_pe[0].u_pe/_436_/Q (sky130_fd_sc_hd__dfrtp_1)
+   0.041    0.336 v gen_pe[0].u_pe/_202_/Y (sky130_fd_sc_hd__nand2_1)
+   0.051    0.386 ^ gen_pe[0].u_pe/_216_/Y (sky130_fd_sc_hd__o21ai_0)
+   0.000    0.386 ^ gen_pe[0].u_pe/_402_/D (sky130_fd_sc_hd__dfrtp_1)
+            0.386   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.000    0.000   clock network delay (ideal)
+   0.000    0.000   clock reconvergence pessimism
+            0.000 ^ gen_pe[0].u_pe/_402_/CLK (sky130_fd_sc_hd__dfrtp_1)
+  -0.043   -0.043   library hold time
+           -0.043   data required time
+-----------------------------------------------------------
+           -0.043   data required time
+           -0.386   data arrival time
+-----------------------------------------------------------
+            0.430   slack (MET)
+
+
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential            1.632e-03  2.492e-04  3.882e-09  1.881e-03  48.8%
+Combinational         1.019e-03  9.523e-04  3.391e-09  1.972e-03  51.2%
+Clock                 0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+Macro                 0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+Pad                   0.000e+00  0.000e+00  0.000e+00  0.000e+00   0.0%
+----------------------------------------------------------------
+Total                 2.651e-03  1.202e-03  7.274e-09  3.853e-03 100.0%
+                          68.8%      31.2%       0.0%
+% 

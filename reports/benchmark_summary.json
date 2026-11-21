@@ -1,0 +1,206 @@
+{
+  "timestamp": "2026-11-22T00:34:57.354860",
+  "fpga_zybo_z7_10": {
+    "device": "AMD Xilinx Zynq-7000 xc7z010clg400-1 (Zybo Z7-10)",
+    "clk_mhz": 100.0,
+    "cycles_avg": 3901,
+    "cycles": 12796,
+    "latency_avg_us": 39.01,
+    "latency_us": 127.96,
+    "fps_avg": 25634.45270443476,
+    "fps": 7814.942169427946,
+    "lut_used": 1898,
+    "lut_avail": 17600,
+    "lut_pct": 10.78,
+    "ff_used": 741,
+    "ff_avail": 35200,
+    "ff_pct": 2.11,
+    "bram36_used": 18,
+    "bram36_avail": 60,
+    "bram36_pct": 30.0,
+    "bram18_used": 1,
+    "bram18_avail": 120,
+    "bram18_pct": 0.83,
+    "dsp_used": 0,
+    "dsp_avail": 80,
+    "dsp_pct": 0.0,
+    "wns_ns": 0.375,
+    "tns_ns": 0.0,
+    "whs_ns": 0.081,
+    "fmax_mhz": 103.8961038961039,
+    "p_tot_w": 0.155,
+    "p_dyn_w": 0.064,
+    "p_stat_w": 0.091,
+    "energy_avg_uj": 2.4966399999999997,
+    "energy_uj": 8.18944
+  },
+  "fpga_pynq_z2": {
+    "device": "TUL PYNQ-Z2 xc7z020clg400-1",
+    "board_lut": 2038,
+    "board_ff": 924,
+    "soc_lut": 1697,
+    "soc_ff": 742,
+    "cpu_lut": 658,
+    "cpu_ff": 183,
+    "hwpe_lut": 910,
+    "hwpe_ff": 410,
+    "ce_lut": 400,
+    "ce_ff": 181,
+    "ctrl_lut": 336,
+    "ctrl_ff": 141,
+    "act_lut": 63,
+    "act_ff": 16,
+    "wns_ns": 0.469,
+    "fmax_mhz": 104.92078480747035
+  },
+  "asic": {
+    "lutalm_core_mul_s8": {
+      "module": "lutalm_core_mul_s8",
+      "cells": 192,
+      "area_um2": 227.43,
+      "delay_ns": 0.93,
+      "p_int_w": 1.72e-05,
+      "p_sw_w": 1.88e-05,
+      "p_leak_w": 5.33e-06,
+      "p_tot_w": 4.14e-05,
+      "p_tot_uw": 41.4,
+      "p_dyn_uw": 36.0,
+      "p_leak_uw": 5.33
+    },
+    "pe_mac": {
+      "module": "pe_mac",
+      "cells": 453,
+      "area_um2": 724.318,
+      "delay_ns": 0.0,
+      "p_int_w": 0.000183,
+      "p_sw_w": 7.63e-05,
+      "p_leak_w": 1.51e-05,
+      "p_tot_w": 0.000274,
+      "p_tot_uw": 274.0,
+      "p_dyn_uw": 259.3,
+      "p_leak_uw": 15.1
+    },
+    "compute_engine_1x4": {
+      "module": "compute_engine_1x4",
+      "cells": 1843,
+      "area_um2": 2880.514,
+      "delay_ns": 0.0,
+      "p_int_w": 0.00116,
+      "p_sw_w": 0.000626,
+      "p_leak_w": 5.98e-05,
+      "p_tot_w": 0.00185,
+      "p_tot_uw": 1850.0,
+      "p_dyn_uw": 1786.0,
+      "p_leak_uw": 59.8
+    },
+    "riscv_core_rv32i": {
+      "module": "riscv_core_rv32i",
+      "cells": 6922,
+      "area_um2": 13263.558,
+      "delay_ns": 0.0,
+      "p_int_w": 0.00647,
+      "p_sw_w": 0.00182,
+      "p_leak_w": 0.000245,
+      "p_tot_w": 0.00853,
+      "p_tot_uw": 8530.0,
+      "p_dyn_uw": 8290.0,
+      "p_leak_uw": 245.0
+    }
+  },
+  "thermal_sweep": [
+    {
+      "ambient": "-40",
+      "junction": "-38.1",
+      "margin": "123.1 C",
+      "static": "0.071",
+      "dynamic": "0.064",
+      "total": "0.135"
+    },
+    {
+      "ambient": "0",
+      "junction": "2.0",
+      "margin": "83.0 C",
+      "static": "0.074",
+      "dynamic": "0.064",
+      "total": "0.138"
+    },
+    {
+      "ambient": "25",
+      "junction": "27.2",
+      "margin": "57.8 C",
+      "static": "0.092",
+      "dynamic": "0.064",
+      "total": "0.155"
+    },
+    {
+      "ambient": "50",
+      "junction": "52.8",
+      "margin": "32.2 C",
+      "static": "0.130",
+      "dynamic": "0.064",
+      "total": "0.194"
+    },
+    {
+      "ambient": "85",
+      "junction": "90.1",
+      "margin": "-5.1 C",
+      "static": "0.288",
+      "dynamic": "0.064",
+      "total": "0.351"
+    },
+    {
+      "ambient": "100",
+      "junction": "107.5",
+      "margin": "-22.5 C",
+      "static": "0.455",
+      "dynamic": "0.064",
+      "total": "0.519"
+    }
+  ],
+  "voltage_sweep": [
+    {
+      "vccint": "0.95",
+      "total": "0.150",
+      "dynamic": "0.060",
+      "static": "0.091"
+    },
+    {
+      "vccint": "1.00",
+      "total": "0.155",
+      "dynamic": "0.064",
+      "static": "0.092"
+    },
+    {
+      "vccint": "1.05",
+      "total": "0.161",
+      "dynamic": "0.068",
+      "static": "0.092"
+    }
+  ],
+  "switching_sweep": [
+    {
+      "rate": "5.0",
+      "dynamic": "0.064",
+      "logic": "0.010",
+      "signals": "0.011"
+    },
+    {
+      "rate": "12.5",
+      "dynamic": "0.064",
+      "logic": "0.010",
+      "signals": "0.011"
+    },
+    {
+      "rate": "25.0",
+      "dynamic": "0.064",
+      "logic": "0.010",
+      "signals": "0.011"
+    },
+    {
+      "rate": "50.0",
+      "dynamic": "0.064",
+      "logic": "0.010",
+      "signals": "0.011"
+    }
+  ]
+}

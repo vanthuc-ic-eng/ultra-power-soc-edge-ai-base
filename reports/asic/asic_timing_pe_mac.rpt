@@ -1,0 +1,74 @@
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _847_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ rst_n (in)
+   0.00    0.00 ^ _847_/RN (DFFR_X1)
+           0.00   data arrival time
+
+   5.00    5.00   clock clk (rise edge)
+   0.00    5.00   clock network delay (ideal)
+   0.00    5.00   clock reconvergence pessimism
+           5.00 ^ _847_/CK (DFFR_X1)
+   0.05    5.05   library recovery time
+           5.05   data required time
+---------------------------------------------------------
+           5.05   data required time
+          -0.00   data arrival time
+---------------------------------------------------------
+           5.05   slack (MET)
+
+
+Startpoint: _847_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _892_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ _847_/CK (DFFR_X1)
+   0.11    0.11 ^ _847_/Q (DFFR_X1)
+   0.06    0.17 ^ _585_/ZN (AND4_X1)
+   0.05    0.22 ^ _586_/ZN (AND2_X1)
+   0.04    0.26 v _588_/ZN (NAND4_X1)
+   0.02    0.29 ^ _589_/ZN (INV_X1)
+   0.04    0.33 v _591_/ZN (NAND4_X1)
+   0.04    0.36 ^ _592_/ZN (NOR2_X1)
+   0.41    0.77 ^ _593_/Z (XOR2_X1)
+   0.04    0.81 v _733_/ZN (XNOR2_X1)
+   0.07    0.88 v _746_/ZN (OR2_X1)
+   0.12    1.00 v _748_/ZN (OR4_X1)
+   0.04    1.04 ^ _764_/ZN (AOI211_X1)
+   0.02    1.07 v _783_/ZN (AOI21_X1)
+   0.09    1.15 v _814_/ZN (OR4_X1)
+   0.03    1.19 ^ _821_/ZN (AOI21_X1)
+   0.02    1.20 v _826_/ZN (AOI21_X1)
+   0.07    1.27 ^ _835_/ZN (OAI21_X1)
+   0.02    1.29 v _842_/ZN (AOI21_X1)
+   0.04    1.33 v _844_/ZN (XNOR2_X1)
+   0.06    1.39 v _845_/Z (MUX2_X1)
+   0.06    1.45 v _846_/Z (MUX2_X1)
+   0.00    1.45 v _892_/D (DFFR_X1)
+           1.45   data arrival time
+
+   5.00    5.00   clock clk (rise edge)
+   0.00    5.00   clock network delay (ideal)
+   0.00    5.00   clock reconvergence pessimism
+           5.00 ^ _892_/CK (DFFR_X1)
+  -0.04    4.96   library setup time
+           4.96   data required time
+---------------------------------------------------------
+           4.96   data required time
+          -1.45   data arrival time
+---------------------------------------------------------
+           3.51   slack (MET)
+
+

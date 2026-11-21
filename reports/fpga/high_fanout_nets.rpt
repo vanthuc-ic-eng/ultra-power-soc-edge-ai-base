@@ -1,0 +1,41 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Sat Nov 14 03:18:51 2026
+| Host         : ic-workstation running 64-bit Ubuntu 24.04.5 LTS
+| Command      : report_high_fanout_nets -max_nets 20 -file /workspace/projects/pulp_edge_ai_soc/reports/fpga/high_fanout_nets.rpt
+| Design       : pulp_riscv_ai_soc_top
+| Device       : xc7z010
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+High Fan-out Nets Information
+
+1. Summary
+----------
+
++------------------------------------------------------------------------+--------+-------------+
+| Net Name                                                               | Fanout | Driver Type |
++------------------------------------------------------------------------+--------+-------------+
+| u_hwpe_subsystem/u_hwpe/u_compute_engine/gen_pe[0].u_pe/rst_sync_n_reg |    723 | LUT1        |
+| u_cpu/host_addr[3]                                                     |    240 | LUT4        |
+| u_cpu/host_addr[0]                                                     |    240 | LUT4        |
+| u_cpu/host_addr[1]                                                     |    240 | LUT4        |
+| u_cpu/host_addr[4]                                                     |    240 | LUT4        |
+| u_cpu/host_addr[2]                                                     |    240 | LUT4        |
+| u_cpu/host_addr[5]                                                     |    240 | LUT4        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/pe_clr                           |    226 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/state_q[0]                       |    189 | FDCE        |
+| u_cpu/instr_q_reg_n_0_[11]                                             |    148 | FDCE        |
+| u_cpu/Q[0]                                                             |    147 | FDCE        |
+| u_cpu/instr_q_reg_n_0_[13]                                             |    146 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_in_addr_o_reg[9]_0[3]         |    144 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_in_addr_o_reg[9]_0[2]         |    144 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_in_addr_o_reg[9]_0[1]         |    144 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_in_addr_o_reg[9]_0[0]         |    144 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_in_addr_o_reg[9]_0[4]         |    144 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/l1_in_addr_o_reg[9]_0[5]         |    144 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/state_q[2]                       |    136 | FDCE        |
+| u_hwpe_subsystem/u_hwpe/u_stream_ctrl/state_q[1]                       |    126 | FDCE        |
++------------------------------------------------------------------------+--------+-------------+
+
+

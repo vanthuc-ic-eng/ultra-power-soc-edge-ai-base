@@ -1,0 +1,127 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `/workspace/projects/pulp_edge_ai_soc/synth_sky130/scripts/synth_hwpe_top.ys' --
+
+1. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/pkg/pulp_hwpe_pkg.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/pkg/pulp_hwpe_pkg.sv' to AST representation.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/lut_primitives.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/lut_primitives.sv' to AST representation.
+Generating RTLIL representation for module `\lut_adder_n'.
+Generating RTLIL representation for module `\lut_inc_n'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low2.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low2.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_low2'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low3.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low3.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_low3'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low4.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_low4.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_low4'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_adaptive64.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_adaptive64.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_adaptive64'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_converter_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_lut_converter_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_lut_converter_u8'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_input_sign_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_input_sign_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_input_sign_u8'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_normalizer_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_normalizer_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_normalizer_u8'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_encoder_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_encoder_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_encoder_u8'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_act_encoder_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_act_encoder_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_act_encoder_u8'.
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_adder_u8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_adder_u8.sv' to AST representation.
+Generating RTLIL representation for module `\log_adder_u8'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_antilog_u16.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_antilog_u16.sv' to AST representation.
+Generating RTLIL representation for module `\log_antilog_u16'.
+Successfully finished Verilog frontend.
+
+14. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/log_output_sign_s16.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/log_output_sign_s16.sv' to AST representation.
+Generating RTLIL representation for module `\log_output_sign_s16'.
+Successfully finished Verilog frontend.
+
+15. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_core_mul_s8.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/lutalm_core_mul_s8.sv' to AST representation.
+Generating RTLIL representation for module `\lutalm_core_mul_s8'.
+Successfully finished Verilog frontend.
+
+16. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/icg_cell.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/icg_cell.sv' to AST representation.
+Generating RTLIL representation for module `\icg_cell'.
+Successfully finished Verilog frontend.
+
+17. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/pe_mac.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/pe_mac.sv' to AST representation.
+Generating RTLIL representation for module `\pe_mac'.
+Successfully finished Verilog frontend.
+
+18. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/core/compute_engine_1x4.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/core/compute_engine_1x4.sv' to AST representation.
+Generating RTLIL representation for module `\compute_engine_1x4'.
+Successfully finished Verilog frontend.
+
+19. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/controller/argmax_unit.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/controller/argmax_unit.sv' to AST representation.
+Generating RTLIL representation for module `\argmax_unit'.
+Successfully finished Verilog frontend.
+
+20. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/controller/requant_relu.sv
+Parsing SystemVerilog input from `/workspace/projects/pulp_edge_ai_soc/rtl/controller/requant_relu.sv' to AST representation.
+Generating RTLIL representation for module `\requant_relu'.
+Successfully finished Verilog frontend.
+
+21. Executing Verilog-2005 frontend: /workspace/projects/pulp_edge_ai_soc/rtl/controller/hwpe_stream_ctrl.sv

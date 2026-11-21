@@ -1,0 +1,61 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Sat Nov 14 03:18:48 2026
+| Host         : ic-workstation running 64-bit Ubuntu 24.04.5 LTS
+| Command      : report_utilization -hierarchical -file /workspace/projects/pulp_edge_ai_soc/reports/fpga/utilization_hierarchical.rpt
+| Design       : pulp_riscv_ai_soc_top
+| Device       : xc7z010clg400-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------------------------+-----------------------+------------+------------+---------+------+-----+--------+--------+------------+
+|                Instance               |         Module        | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------------------------------+-----------------------+------------+------------+---------+------+-----+--------+--------+------------+
+| pulp_riscv_ai_soc_top                 |                 (top) |       1898 |       1640 |     258 |    0 | 741 |     18 |      1 |          0 |
+|   (pulp_riscv_ai_soc_top)             |                 (top) |        216 |          2 |     214 |    0 |   6 |      2 |      0 |          0 |
+|   u_cpu                               |      riscv_core_rv32i |        667 |        623 |      44 |    0 | 183 |      0 |      0 |          0 |
+|   u_hwpe_subsystem                    |      hwpe_csr_wrapper |        936 |        936 |       0 |    0 | 517 |     16 |      1 |          0 |
+|     (u_hwpe_subsystem)                |      hwpe_csr_wrapper |         30 |         30 |       0 |    0 | 108 |      0 |      0 |          0 |
+|     u_hwpe                            |         pulp_hwpe_top |        906 |        906 |       0 |    0 | 409 |     16 |      1 |          0 |
+|       gen_requant[0].u_requant        |          requant_relu |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
+|       gen_requant[1].u_requant        |        requant_relu_0 |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
+|       gen_requant[2].u_requant        |        requant_relu_1 |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
+|       gen_requant[3].u_requant        |        requant_relu_2 |          0 |          0 |       0 |    0 |   0 |      0 |      0 |          0 |
+|       u_act_mem                       |   tcdm_activation_mem |         63 |         63 |       0 |    0 |  16 |      0 |      0 |          0 |
+|       u_argmax                        |           argmax_unit |         16 |         16 |       0 |    0 |  72 |      0 |      0 |          0 |
+|       u_compute_engine                |    compute_engine_1x4 |        395 |        395 |       0 |    0 | 181 |      0 |      0 |          0 |
+|         gen_pe[0].u_pe                |                pe_mac |        201 |        201 |       0 |    0 |  46 |      0 |      0 |          0 |
+|           (gen_pe[0].u_pe)            |                pe_mac |        196 |        196 |       0 |    0 |  46 |      0 |      0 |          0 |
+|           u_mult_core                 | lutalm_core_mul_s8_10 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|             gen_carry_adder.u_log_add |       log_adder_u8_11 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|         gen_pe[1].u_pe                |              pe_mac_3 |         83 |         83 |       0 |    0 |  45 |      0 |      0 |          0 |
+|           (gen_pe[1].u_pe)            |              pe_mac_3 |         78 |         78 |       0 |    0 |  45 |      0 |      0 |          0 |
+|           u_mult_core                 |  lutalm_core_mul_s8_8 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|             gen_carry_adder.u_log_add |        log_adder_u8_9 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|         gen_pe[2].u_pe                |              pe_mac_4 |         83 |         83 |       0 |    0 |  45 |      0 |      0 |          0 |
+|           (gen_pe[2].u_pe)            |              pe_mac_4 |         78 |         78 |       0 |    0 |  45 |      0 |      0 |          0 |
+|           u_mult_core                 |  lutalm_core_mul_s8_6 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|             gen_carry_adder.u_log_add |        log_adder_u8_7 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|         gen_pe[3].u_pe                |              pe_mac_5 |         66 |         66 |       0 |    0 |  45 |      0 |      0 |          0 |
+|           (gen_pe[3].u_pe)            |              pe_mac_5 |         61 |         61 |       0 |    0 |  45 |      0 |      0 |          0 |
+|           u_mult_core                 |    lutalm_core_mul_s8 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|             gen_carry_adder.u_log_add |          log_adder_u8 |          5 |          5 |       0 |    0 |   0 |      0 |      0 |          0 |
+|       u_stream_ctrl                   |      hwpe_stream_ctrl |        341 |        341 |       0 |    0 | 140 |      0 |      1 |          0 |
+|       u_weight_mem                    |      tcdm_weight_bram |         96 |         96 |       0 |    0 |   0 |     16 |      0 |          0 |
+|   u_interconnect                      |  soc_bus_interconnect |         61 |         61 |       0 |    0 |   2 |      0 |      0 |          0 |
+|   u_uart                              |               uart_tx |         18 |         18 |       0 |    0 |  33 |      0 |      0 |          0 |
++---------------------------------------+-----------------------+------------+------------+---------+------+-----+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

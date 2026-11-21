@@ -1,0 +1,44 @@
+
+26. Printing statistics.
+
+=== riscv_core_rv32i ===
+
+   Number of wires:               6980
+   Number of wire bits:           8365
+   Number of public wires:          60
+   Number of public wire bits:    1440
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               6922
+     AND2_X1                        68
+     AND3_X1                        21
+     AND4_X1                         3
+     AOI211_X1                      45
+     AOI21_X1                      156
+     AOI221_X1                      21
+     AOI22_X1                       77
+     DFFR_X1                       199
+     DFFS_X1                         3
+     DFF_X1                       1024
+     INV_X1                        377
+     MUX2_X1                      1867
+     NAND2_X1                      734
+     NAND3_X1                       30
+     NAND4_X1                       10
+     NOR2_X1                       164
+     NOR3_X1                        66
+     NOR4_X1                        12
+     OAI211_X1                     978
+     OAI21_X1                      748
+     OAI221_X1                      19
+     OAI22_X1                       72
+     OAI33_X1                        4
+     OR2_X1                         32
+     OR3_X1                         15
+     OR4_X1                          1
+     XNOR2_X1                      147
+     XOR2_X1                        29
+
+   Chip area for module '\riscv_core_rv32i': 13263.558000
+
